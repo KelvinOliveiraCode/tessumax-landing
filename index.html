@@ -1,1056 +1,1179 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Tessumax - studio de sites, sistemas e apps do brief à entrega. Garimpo e KODAROS no ar. Código aberto, contato real.">
-<title>Tessumax Studio - sites, sistemas e apps do brief à entrega</title>
+<!doctype html>
+<html lang="pt-BR" class="no-js"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tessumax — sites, sistemas, apps, vídeo e marketing do brief ao lançamento</title>
+<meta name="description" content="Tessumax é uma empresa de tecnologia em Belém/PA. Sites, sistemas sob medida, apps para iOS e Android, vídeos publicitários e marketing digital com processo claro e código próprio — do brief ao lançamento.">
+<meta name="theme-color" content="#050506" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f7f8" media="(prefers-color-scheme: light)">
+<meta name="author" content="Kelvin Oliveira">
 <link rel="canonical" href="https://kelvinoliveiracode.github.io/tessumax-landing/">
-<meta name="robots" content="index,follow">
-<meta name="author" content="Kelvin Oliveira - Tessumax Studio">
+
 <meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Tessumax — do brief ao lançamento">
+<meta property="og:description" content="Sites, sistemas sob medida, apps iOS e Android, vídeos publicitários e marketing digital. Processo claro, código próprio, resultado verificável.">
 <meta property="og:url" content="https://kelvinoliveiracode.github.io/tessumax-landing/">
-<meta property="og:title" content="Tessumax Studio - sites, sistemas e apps do brief à entrega">
-<meta property="og:description" content="Tessumax - studio de sites, sistemas e apps do brief à entrega. Garimpo e KODAROS no ar. Código aberto, contato real.">
-<meta property="og:image" content="https://kelvinoliveiracode.github.io/tessumax-landing/assets/banner.png">
-<meta property="og:image:width" content="1789">
-<meta property="og:image:height" content="671">
+<meta property="og:image" content="https://kelvinoliveiracode.github.io/tessumax-landing/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Tessumax — marca e nome sobre fundo escuro">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Tessumax Studio - sites, sistemas e apps do brief à entrega">
-<meta name="twitter:description" content="Tessumax - studio de sites, sistemas e apps do brief à entrega. Garimpo e KODAROS no ar. Código aberto, contato real.">
-<meta name="twitter:image" content="https://kelvinoliveiracode.github.io/tessumax-landing/assets/banner.png">
-<link rel="icon" href="assets/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" crossorigin>
-<link rel="preload" href="https://fonts.gstatic.com/s/spacegrotesk/v22/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7o.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/banner.svg" as="image">
+<meta name="twitter:image" content="https://kelvinoliveiracode.github.io/tessumax-landing/assets/og-image.png">
+<meta name="twitter:image:alt" content="Tessumax — marca e nome sobre fundo escuro">
+
+<link rel="icon" href="logo-Tessumax.svg" type="image/svg+xml">
+<link rel="icon" href="assets/apple-touch-icon.png" sizes="180x180" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180">
+
+<script>
+  /* tema antes do primeiro paint (evita flash) + flag de JS */
+  (function () {
+    var d = document.documentElement;
+    d.classList.remove('no-js');
+    d.classList.add('js');
+    try {
+      var saved = localStorage.getItem('tessumax-theme');
+      d.dataset.theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    } catch (e) {
+      d.dataset.theme = 'dark';
+    }
+  })();
+</script>
+
 <style>
-  :root {
-    --bg: #0e0e11;
-    --bg-alt: #141418;
-    --panel: #1a1a1f;
-    --line: rgba(245,245,242,0.10);
-    --text: #f5f5f2;
-    --text-secondary: #d0d0d0;
-    --muted: #7a7a80;
-    --ink: #111113;
-    --paper: #f5f5f2;
-    --paper-2: #eaeae5;
-    --accent: #666666;
-    --accent-2: #f5f5f2;
-    --radius: 22px;
-    --radius-sm: 12px;
-    --col: clamp(1rem, 5vw, 4rem);
-  }
+/* OD-LAYOUT-PRIMITIVES v1 — estrutura apenas: display, flex/grid, overflow, wrapping, ratio, geometria.
+   Fica em @layer como primeiro conjunto de regras; o CSS do produto (fora da camada) sempre vence. */
+@layer od-layout {
+  :where(.od-stack,.od-row,.od-row-top,.od-cluster,.od-grid,.od-field,.od-stat,.od-cell,.od-tile) > :where(*) { min-width: 0; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root { color-scheme: dark; }
-  /* CUSTOM SCROLLBAR */
-  *::-webkit-scrollbar { width: 10px; height: 10px; }
-  *::-webkit-scrollbar-track { background: var(--bg-alt); }
-  *::-webkit-scrollbar-thumb { background: var(--line); border-radius: 999px; border: 2px solid var(--bg-alt); }
-  *::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-  *::-webkit-scrollbar-corner { background: var(--bg-alt); }
-  html { scrollbar-width: thin; scrollbar-color: var(--line) var(--bg-alt); }
-  .carousel-track::-webkit-scrollbar, .carousel-track::-webkit-scrollbar-track, .carousel-track::-webkit-scrollbar-thumb { display: none; width: 0; height: 0; }
-  .carousel-track { -ms-overflow-style: none; scrollbar-width: none !important; }
+  /* containers */
+  .od-stack   { display: flex; flex-direction: column; gap: var(--od-gap, 8px); }
+  .od-row     { display: flex; align-items: center; gap: var(--od-gap, 8px); }
+  .od-row-top { display: flex; align-items: flex-start; gap: var(--od-gap, 8px); }
+  .od-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--od-gap, 8px); }
+  .od-fill    { flex: 1 1 0; min-width: 0; }
+  .od-fixed   { flex: none; }
+  .od-grid    { display: grid; gap: var(--od-gap, 12px); grid-template-columns: repeat(var(--od-cols, 3), minmax(0, 1fr)); }
 
-  /* CARROSEL DOTS */
-  .carousel-dots { display: none; gap: .5rem; justify-content: center; margin-top: 1rem; }
-  .carousel-dot {
-    width: 8px; height: 8px; border-radius: 50%; background: var(--line);
-    cursor: pointer; transition: background .2s, transform .2s; border: none; padding: 0;
-  }
-  .carousel-dot.active { background: var(--accent); transform: scale(1.4); }
-  .carousel-dot:hover { background: var(--text); }
+  /* informação empilhada: cada peça é sua própria linha — nunca spans irmãos */
+  .od-stat, .od-field, .od-cell { display: grid; gap: var(--od-gap, 2px); }
+  :where(.od-stat,.od-field,.od-cell) > :where(*) { display: block; }
+  .od-tile { display: grid; grid-template-rows: auto 1fr; }
+  :where(.od-tile) > :where(*) { display: block; }
 
-  @media (max-width: 900px) {
-    .carousel-dots { display: flex; }
-  }
+  /* mídia mantém o ratio intrínseco por padrão; recorte só com opt-in explícito */
+  .od-media { display: block; width: 100%; height: auto; aspect-ratio: var(--od-ratio, auto); }
+  .od-media-cover { object-fit: cover; }
 
-  html { scroll-behavior: smooth; }
+  /* SVGs de interface optam por geometria limitada; SVGs de conteúdo ficam fora disso */
+  .od-icon { display: inline-block; inline-size: var(--od-icon-size, 1em); block-size: var(--od-icon-size, 1em); flex: none; }
 
-  body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    font-feature-settings: "ss01","cv05";
-    overflow-x: hidden;
-    max-width: 100%;
-  }
-  html {
-    overflow-x: clip;
-    overflow-x: hidden;
-    max-width: 100%;
-    color-scheme: dark;
-  }
+  /* texto de dado — copy autoral é reescrita dentro do orçamento */
+  .od-truncate { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .od-clamp-2, .od-clamp-3 { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+  .od-clamp-2 { -webkit-line-clamp: 2; }
+  .od-clamp-3 { -webkit-line-clamp: 3; }
+  .od-lines-2 { min-height: calc(2 * 1.4em); }
+  .od-nowrap  { white-space: nowrap; }
+  .od-keep    { word-break: keep-all; overflow-wrap: anywhere; }
 
-  a { color: inherit; text-decoration: none; }
-  img { max-width: 100%; height: auto; display: block; }
+  /* esqueleto de tela: barras ocupam o próprio espaço, o meio rola */
+  .od-screen { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%; }
+  .od-scroll { overflow-y: auto; overscroll-behavior: contain; min-height: 0; }
 
-  h1,h2,h3,h4 { font-family: 'Space Grotesk', system-ui, sans-serif; letter-spacing: -0.025em; line-height: 1; }
+  /* trilho horizontal: o próximo item aparece na borda */
+  .od-rail { display: flex; gap: var(--od-gap, 8px); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+             padding-inline: var(--od-rail-pad, 16px); scroll-padding-inline: var(--od-rail-pad, 16px); }
+  .od-rail::-webkit-scrollbar { display: none; }
+  :where(.od-rail) > :where(*) { flex: none; scroll-snap-align: start; }
+  :where(.od-rail) > :where(:last-child) { margin-inline-end: var(--od-rail-pad, 16px); }
 
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-
-  /* SKIP LINK */
-  .skip-link {
-    position: absolute;
-    top: -10000px;
-    left: 0;
-    background: var(--paper);
-    color: var(--ink);
-    padding: 1rem;
-    z-index: 10000;
-    text-decoration: underline;
-    font-weight: 600;
-    border-radius: var(--radius-sm);
-  }
-  .skip-link:focus {
-    top: var(--col);
-    left: var(--col);
-  }
-
-  /* PRELOADER */
-  .preloader {
-    position: fixed; inset: 0; z-index: 100;
-    background: var(--bg);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 1.5rem;
-    transition: opacity .5s ease, visibility .5s ease;
-  }
-  .preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
-  .preloader .logo-wrap {
-    width: 64px; height: 64px;
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-  .preloader .logo-wrap img { width: 100%; height: 100%; object-fit: contain; filter: invert(1); }
-  .preloader .bar {
-    width: 120px; height: 2px; background: var(--line);
-    border-radius: 2px; overflow: hidden;
-  }
-  .preloader .bar-fill {
-    height: 100%; width: 0%; background: var(--accent);
-    transition: width .3s ease;
-  }
-  .preloader .label { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .5; } }
-
-  /* WRAPPERS */
-  .shell {
-    width: 100%;
-    padding-left: var(--col);
-    padding-right: var(--col);
-  }
-
-  .kicker {
-    display: inline-block;
-    font-size: .75rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* NAV */
-  nav.top {
-    position: sticky; top: 0; z-index: 20;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    background: rgba(14,14,17,0.7);
-    transform: translateY(-100%);
-    transition: transform .4s ease;
-  }
-  nav.top.visible { transform: translateY(0); }
-  nav.top .wrap {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem var(--col);
-    gap: 1rem;
-  }
-  .brand {
-    display: flex; align-items: center; gap: 0.75rem;
-    font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700;
-    font-size: 1.25rem; letter-spacing: -0.02em;
-  }
-  .brand img { width: 34px; height: 34px; object-fit: contain; filter: invert(1); mix-blend-mode: screen; }
-  .brand span { color: var(--text); }
-  .brand em { color: var(--muted); font-style: normal; }
-
-  .navlinks {
-    display: flex; gap: 1.25rem; align-items: center;
-  }
-  .hamburger {
-    display: none;
-  }
-  .mobile-menu {
-    display: none;
-  }
-  .navlinks a { font-size: .9rem; color: var(--text-secondary); transition: color .2s; }
-  .navlinks a:hover { color: var(--text); }
-  .navlinks .cta {
-    background: var(--paper); color: var(--ink);
-    padding: .5rem 1.1rem; border-radius: 999px; font-weight: 600; font-size: .9rem;
-    transition: background .2s, color .2s;
-  }
-  .navlinks .cta:hover { background: var(--accent); color: #fff; }
-
-  /* HERO */
-  header.hero {
-    width: 100%; min-height: 65vh;
-    display: flex; align-items: flex-end;
-    position: relative; overflow: hidden;
-    background: var(--bg);
-  }
-  header.hero .bg {
-    position: absolute; inset: 0; z-index: 0;
-    background-image: url('assets/banner.svg'); background-size: cover; background-position: center;
-    opacity: .25;
-  }
-  header.hero .grid {
-    position: absolute; inset: 0; z-index: 1;
-    background: radial-gradient(ellipse at 50% 120%, rgba(102,102,102,0.03), transparent 60%);
-    pointer-events: none;
-  }
-  header.hero .content {
-    position: relative; z-index: 2; width: 100%;
-    padding: 0 var(--col) clamp(3rem, 8vh, 7rem);
-  }
-  header.hero h1 {
-    font-size: clamp(2.8rem, 7vw, 8rem);
-    font-weight: 700;
-    max-width: 14ch;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.035em;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: heroIn .8s ease forwards .2s;
-  }
-  header.hero .lead {
-    font-size: clamp(1.1rem, 1.6vw, 1.5rem);
-    color: var(--text-secondary);
-    max-width: 42ch;
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: heroIn .8s ease forwards .4s;
-  }
-  .hero-actions {
-    display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: heroIn .8s ease forwards .6s;
-  }
-  @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: .6rem;
-    background: var(--paper); color: var(--ink);
-    padding: 1rem 1.6rem; border-radius: 999px;
-    font-weight: 600; font-size: 1rem;
-    transition: transform .2s ease, background .2s ease;
-    border: none;
-  }
-  .btn-primary:hover { transform: translateY(-2px); background: var(--accent); color: #fff; }
-  .btn-ghost {
-    color: var(--text); font-size: 1rem; font-weight: 500;
-    padding: 1rem 1.4rem; border-radius: 999px;
-    transition: color .2s ease, background .2s;
-    background: rgba(255,255,255,.03);
-  }
-  .btn-ghost:hover { border-color: var(--text); background: rgba(245,245,242,.05); }
-
-  header.hero .foot {
-    position: absolute; right: var(--col); bottom: clamp(1.5rem, 4vh, 4rem); z-index: 2;
-    text-align: right; max-width: 24ch;
-    opacity: 0;
-    animation: heroIn .8s ease forwards .8s;
-  }
-  header.hero .foot span { display: block; color: var(--muted); font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: .25rem; }
-  header.hero .foot strong { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.05rem; }
-
-  /* MARQUEE */
-  .marquee {
-    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-    padding: .8rem 0; overflow: hidden; background: var(--bg-alt);
-    white-space: nowrap; width: 100%; max-width: 100%;
-    contain: content; position: relative;
-  }
-  .marquee-track {
-    display: inline-flex; align-items: center; gap: 2rem;
-    animation: marquee 40s linear infinite;
-    font-family: 'Space Grotesk', system-ui, sans-serif; font-size: clamp(.9rem, 1.5vw, 1.4rem); font-weight: 500;
-    color: var(--text-secondary); max-width: none; will-change: transform;
-  }
-  .marquee-track span { opacity: .85; }
-  .marquee-track .dot {
-    width: 4px; height: 4px; border-radius: 50%;
-    background: var(--muted); flex-shrink: 0;
-  }
-  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
-
-  /* WHAT */
-  section.what { padding: clamp(5rem, 10vh, 9rem) 0; background: var(--bg); width: 100%; }
-  section.what h2 {
-    font-size: clamp(2.2rem, 4.5vw, 5rem); font-weight: 700;
-    max-width: 16ch; margin-bottom: 1.25rem;
-  }
-  section.what > .shell > p { font-size: clamp(1.05rem, 1.4vw, 1.25rem); color: var(--text-secondary); max-width: 58ch; }
-  section.what .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(2rem, 3vw, 4rem); margin-top: 5rem; }
-  section.what .cols article { padding: 0; border: none; }
-  section.what .cols .num { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--accent); margin-bottom: .75rem; }
-  section.what .cols h3 { font-size: 1.5rem; margin-bottom: .6rem; }
-  section.what .cols p { font-size: 1rem; color: var(--text-secondary); }
-
-  /* PROCESS */
-  section.process { background: var(--bg-alt); width: 100%; padding: clamp(5rem, 10vh, 9rem) 0; }
-  section.process .head { margin-bottom: 3rem; }
-  section.process h2 { font-size: clamp(2.2rem, 4.5vw, 4.5rem); max-width: 18ch; }
-  section.process .steps {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: clamp(.8rem, 1.5vw, 1.25rem);
-    margin-top: 2.5rem;
-  }
-  .step {
-    background: var(--bg); border-radius: var(--radius); padding: 2rem 1.5rem;
-    min-height: 200px; display: flex; flex-direction: column; justify-content: space-between;
-    transition: transform .25s ease;
-  }
-  .step:hover { transform: translateY(-4px); }
-  .step .num { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700; font-size: 1rem; color: var(--accent); margin-bottom: 1rem; }
-  .step h3 { font-size: 1.3rem; margin-bottom: .5rem; }
-  .step p { font-size: .95rem; color: var(--text-secondary); }
-
-  /* PRODUCTS */
-  section.products { background: var(--bg); width: 100%; padding: clamp(5rem, 10vh, 9rem) 0; }
-  section.products h2 { font-size: clamp(2.2rem, 4.5vw, 4.5rem); max-width: 18ch; margin-bottom: 1rem; }
-  section.products .intro { color: var(--text-secondary); max-width: 52ch; margin-bottom: 3rem; font-size: 1.1rem; }
-  section.products .grid-prod {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: clamp(.8rem, 1.5vw, 1.5rem);
-  }
-  .prod {
-    grid-column: span 6;
-    background: var(--panel);
-    border-radius: var(--radius);
-    padding: 1.5rem 1.5rem 1.75rem;
-    display: flex; flex-direction: column; justify-content: space-between;
-    transition: transform .25s ease;
-    min-height: 280px;
-  }
-  .prod:hover { transform: translateY(-4px); }
-  .prod .top {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 1.25rem;
-  }
-  .prod .lang {
-    font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--muted); padding: .3rem .65rem; border-radius: 999px;
-  }
-  .prod h3 { font-size: 1.5rem; margin-bottom: .5rem; }
-  .prod p { color: var(--text-secondary); font-size: 1rem; line-height: 1.55; }
-  .prod .links { margin-top: 1.5rem; display: flex; gap: 1rem; font-size: .9rem; }
-  .prod .links a { color: var(--text); padding-bottom: 1px; transition: color .2s; }
-  .prod .links a:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* STACK */
-  section.stack { background: var(--paper); color: var(--ink); width: 100%; padding: clamp(5rem, 10vh, 9rem) 0; }
-  section.stack .head { margin-bottom: 3rem; }
-  section.stack h2 { font-size: clamp(2.2rem, 4.5vw, 4.5rem); color: var(--ink); max-width: 18ch; }
-  section.stack .grid-stack {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: clamp(.8rem, 1.5vw, 1.25rem);
-    margin-top: 2.5rem;
-  }
-  .tech {
-    background: var(--ink); color: var(--paper); padding: 1.5rem 1.25rem;
-    border-radius: var(--radius); min-height: 120px;
-    display: flex; flex-direction: column; justify-content: space-between;
-    transition: transform .25s ease, box-shadow .25s ease;
-  }
-  .tech:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
-  .tech .icon img { filter: brightness(0) invert(1); opacity: .9; transition: opacity .2s, transform .25s ease; }
-  .tech:hover .icon img { opacity: 1; transform: scale(1.1); }
-  .tech .icon { width: 32px; height: 32px; margin-bottom: 1rem; }
-  .tech .icon svg, .tech .icon img { width: 100%; height: 100%; }
-  .tech .name { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600; font-size: .95rem; }
-  .tech .tag { font-size: .7rem; color: #8a8a90; margin-top: .2rem; }
-
-  /* ABOUT */
-  section.about { background: var(--bg-alt); width: 100%; padding: clamp(5rem, 10vh, 8rem) 0; }
-  section.about h2 { font-size: clamp(2rem, 4vw, 4rem); max-width: 20ch; margin-bottom: 1.5rem; }
-  section.about p { color: var(--text-secondary); font-size: 1.1rem; max-width: 54ch; margin-bottom: 1.2rem; }
-
-  /* CONTACT */
-  section.contact { background: var(--paper); color: var(--ink); width: 100%; padding: clamp(5rem, 10vh, 9rem) 0; }
-  section.contact h2 { font-size: clamp(2.2rem, 4.5vw, 5rem); color: var(--ink); max-width: 16ch; margin-bottom: 1.5rem; }
-  section.contact .lead { font-size: 1.15rem; color: #33333a; max-width: 52ch; margin-bottom: 3rem; }
-  section.contact .actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
-  section.contact .btn-dark {
-    background: var(--ink); color: var(--paper); padding: 1rem 1.6rem; border-radius: 999px;
-    font-weight: 600; transition: transform .2s, background .2s;
-  }
-  section.contact .btn-dark:hover { transform: translateY(-2px); background: var(--accent); color: #fff; }
-  section.contact .btn-outline {
-    border: 1px solid var(--ink); color: var(--ink); padding: 1rem 1.6rem; border-radius: 999px; font-weight: 600;
-    transition: background .2s, color .2s, border-color .2s;
-  }
-  section.contact .btn-outline:hover { background: var(--ink); color: var(--paper); }
-  section.contact .info { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; padding-top: 3rem; }
-  section.contact .info div strong { display:block; font-family:'Space Grotesk',system-ui,sans-serif; font-size: .85rem; text-transform: uppercase; margin-bottom: .4rem; color: var(--muted); }
-  section.contact .info div a, section.contact .info div span { color: var(--ink); font-weight: 500; }
-
-  /* FOOTER */
-  footer.site { background: var(--bg); color: var(--text-secondary); padding: 4rem var(--col) 2rem; border-top: 1px solid var(--line); }
-  footer.site .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-  footer.site h3 { font-family:'Space Grotesk',system-ui,sans-serif; color: var(--text); font-size: 1.6rem; margin-bottom: 1rem; }
-  footer.site p { font-size: .95rem; line-height: 1.6; max-width: 40ch; }
-  footer.site h4 { font-family:'Space Grotesk',system-ui,sans-serif; color: var(--text); font-size: 1rem; margin-bottom: 1rem; }
-  footer.site ul { list-style: none; padding: 0; margin: 0; }
-  footer.site ul li { margin-bottom: .5rem; }
-  footer.site ul a { font-size: .9rem; color: var(--text-secondary); transition: color .2s; }
-  footer.site ul a:hover { color: var(--accent); }
-  footer.site .footer-copy { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; padding-top: 2rem; }
-  footer.site .logo { width: 22px; height: 22px; filter: invert(1); }
-  footer.site small { color: var(--muted); font-size: .75rem; }
-  footer.site .credit a { font-size: .78rem; color: var(--muted); transition: color .2s; }
-  footer.site .credit a:hover { color: var(--accent); }
-
-  /* SCROLL REVEAL */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity .7s ease, transform .7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .navlinks { display: none; }
-    .hamburger { display: flex; }
-    section.what .cols { grid-template-columns: 1fr; gap: 1.5rem; }
-    section.process .steps { grid-template-columns: 1fr; }
-    section.products .grid-prod { grid-template-columns: 1fr; }
-    .prod { grid-column: span 1; min-height: 220px; }
-    section.stack .grid-stack { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
-    section.about .wrap { grid-template-columns: 1fr; gap: 2rem; }
-    section.contact .reveal[style*="repeat(2"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
-    footer.site .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-actions { flex-direction: column; gap: .75rem; }
-    .hero-actions .btn-primary, .hero-actions .btn-ghost { text-align: center; width: 100%; justify-content: center; }
-    header.hero .foot { display: none; }
-    header.hero { min-height: 60vh; }
-    header.hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
-    .marquee { padding: .6rem 0; }
-    .marquee-track { font-size: clamp(.75rem, 2.5vw, 1rem); gap: 1.25rem; }
-    .carousel-btn { display: none !important; }
-    .carousel-track > a { flex: 0 0 240px !important; }
-    section.contact .actions { flex-direction: column; align-items: stretch; }
-    section.contact .actions a { text-align: center; width: 100%; }
-    section.contact .info { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 560px) {
-    section.stack .grid-stack { grid-template-columns: 1fr 1fr; gap: .6rem; }
-    .tech { padding: 1rem .75rem; min-height: 100px; }
-    .tech .icon { width: 24px; height: 24px; margin-bottom: .6rem; }
-    .tech .name { font-size: .8rem; }
-    section.contact .info { grid-template-columns: 1fr; }
-    .hero-actions { flex-direction: column; align-items: stretch; }
-    .hero-actions .btn-primary, .hero-actions .btn-ghost { text-align: center; }
-  }
-  @media (max-width: 380px) {
-    section.stack .grid-stack { grid-template-columns: 1fr; }
-  }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; animation: none !important; }
-    .reveal { opacity: 1; transform: none; }
-    header.hero h1, header.hero .lead, .hero-actions, header.hero .foot { opacity: 1; transform: none; }
-  }
+  .od-spacer { flex: none; visibility: hidden; pointer-events: none; }
+  .od-touch  { min-width: 44px; min-height: 44px; }
+}
+/* /OD-LAYOUT-PRIMITIVES v1 */
 </style>
+
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-latin.woff2" crossorigin="">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jetbrains-mono-latin.woff2" crossorigin="">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/css/main.css">
 </head>
+
 <body>
-  <a class="skip-link" href="#contato">Pular para contato</a>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<div class="layers" aria-hidden="true">
+  <div class="layers-grid"></div>
+  <div class="layers-grain"></div>
+  <div class="layers-vignette"></div>
+</div>
+<div class="spotlight" id="spotlight" aria-hidden="true"></div>
 
 <!-- PRELOADER -->
-<div class="preloader" id="preloader">
-  <div class="logo-wrap">
-    <img src="assets/logo.svg" alt="Tessumax">
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Carregando a página">
+  <div class="preloader-inner">
+    <img class="preloader-mark" src="assets/logo-tessumax.svg" alt="" width="64" height="49">
+    <div class="preloader-readout">
+      <span>Carregando</span>
+      <span class="preloader-num" id="preloaderNum">0</span>
+    </div>
+    <div class="preloader-bar"><span class="preloader-bar-fill" id="preloaderBar"></span></div>
   </div>
-  <div class="bar"><div class="bar-fill" id="barFill"></div></div>
-  <span class="label">Carregando</span>
 </div>
 
-<nav class="top" id="mainNav">
-  <div class="wrap">
-    <div class="brand">
-      <img src="assets/logo.svg" alt="Tessumax Studio">
-      <span>Tessumax<em>·studio</em></span>
-    </div>
-    <div class="navlinks">
-      <a href="#servicos">Serviços</a>
-      <a href="#produtos">Produtos</a>
-      <a href="#stack">Stack</a>
-      <a href="#contato">Contato</a>
-      <a class="cta" href="https://www.linkedin.com/in/kelvin-oliveira-code/">LinkedIn</a>
-    </div>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#servicos">Serviços</a>
-    <a href="#produtos">Produtos</a>
-    <a href="#stack">Stack</a>
-    <a href="#exemplos">Exemplos</a>
-    <a href="#contato">Contato</a>
-    <a class="cta" href="https://www.linkedin.com/in/kelvin-oliveira-code/">LinkedIn</a>
-  </div>
-</nav>
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="brand" href="#inicio" aria-label="Tessumax — início">
+      <img class="brand-mark" src="assets/logo-tessumax.svg" alt="" width="34" height="26">
+      <span class="brand-text">
+        <span class="brand-name" style="margin-left: -3px;">Tessumax</span>
+        <span class="brand-tag">tecnologia · Belém/PA</span>
+      </span>
+    </a>
 
-<header class="hero">
-  <div class="bg"></div>
-  <div class="grid"></div>
-  <div class="content">
-    <span class="kicker">Studio digital · Belém, BR</span>
-    <h1>Do brief ao lançamento.</h1>
-    <p class="lead">Sites, sistemas e apps com processo claro, código próprio e resultado real. Um único parceiro do desenho à release.</p>
-    <div class="hero-actions">
-      <a class="btn-primary" href="#produtos">Ver produtos</a>
-      <a class="btn-ghost" href="#contato">Enviar brief</a>
+    <nav class="nav-desktop" aria-label="Navegação principal">
+      <ul>
+        <li><a class="nav-link" href="#frentes" data-nav-link="">serviços</a></li>
+        <li><a class="nav-link" href="#produtos" data-nav-link="">produtos</a></li>
+        <li><a class="nav-link" href="#stack" data-nav-link="">stack</a></li>
+        <li><a class="nav-link" href="#contato" data-nav-link="">contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle="" aria-pressed="false" aria-label="Alternar tema">
+        <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor" stroke="none"></path></svg>
+        <span data-theme-label="">Tinta</span>
+      </button>
+      <a class="icon-btn nav-cta" href="#contato">Enviar brief</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navDrawer" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
-  <div class="foot">
-    <span>Disponível</span>
-    <strong>Novos projetos em 2026</strong>
-  </div>
+  <span class="scroll-progress" id="scrollProgress" aria-hidden="true"></span>
 </header>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>SITES PÚBLICOS</span><span class="dot"></span><span>APPS MOBILE</span><span class="dot"></span><span>DASHBOARDS</span><span class="dot"></span><span>API REST</span><span class="dot"></span><span>TOOLS INTERNAS</span><span class="dot"></span><span>PWA OFFLINE</span><span class="dot"></span>
-    <span>SITES PÚBLICOS</span><span class="dot"></span><span>APPS MOBILE</span><span class="dot"></span><span>DASHBOARDS</span><span class="dot"></span><span>API REST</span><span class="dot"></span><span>TOOLS INTERNAS</span><span class="dot"></span><span>PWA OFFLINE</span><span class="dot"></span>
+<!-- GAVETA MOBILE -->
+<div class="nav-drawer" id="navDrawer" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+  <div class="drawer-inner od-screen">
+    <p class="eyebrow">Menu</p>
+    <nav class="drawer-nav od-scroll" aria-label="Seções">
+      <a class="drawer-link" href="#frentes"><span>Serviços</span><span class="drawer-index">01</span></a>
+      <a class="drawer-link" href="#processo"><span>Processo</span><span class="drawer-index">02</span></a>
+      <a class="drawer-link" href="#produtos"><span>Produtos</span><span class="drawer-index">03</span></a>
+      <a class="drawer-link" href="#exemplos"><span>Exemplos</span><span class="drawer-index">04</span></a>
+      <a class="drawer-link" href="#stack"><span>Stack</span><span class="drawer-index">05</span></a>
+      <a class="drawer-link" href="#sobre"><span>Quem faz</span><span class="drawer-index">06</span></a>
+      <a class="drawer-link" href="#depoimentos"><span>Depoimentos</span><span class="drawer-index">07</span></a>
+      <a class="drawer-link" href="#contato"><span>Contato</span><span class="drawer-index">08</span></a>
+    </nav>
+    <div class="drawer-foot">
+      <a class="btn btn-primary" href="#contato">Enviar brief</a>
+      <div class="od-cluster" style="--od-gap:8px">
+        <a class="chip" href="https://wa.me/5591986134599" target="_blank" rel="noopener"><img class="logo-img" src="assets/icons/whatsapp.svg" alt="" width="14" height="14" loading="lazy">WhatsApp</a>
+        <a class="chip" href="https://github.com/KelvinOliveiraCode" target="_blank" rel="noopener"><img class="logo-img" src="assets/icons/github.svg" alt="" width="14" height="14" loading="lazy">GitHub</a>
+        <a class="chip" href="https://www.linkedin.com/in/kelvin-oliveira-code/" target="_blank" rel="noopener"><img class="logo-img" src="assets/icons/linkedin.svg" alt="" width="14" height="14" loading="lazy">LinkedIn</a>
+      </div>
+    </div>
   </div>
 </div>
 
-<section class="what" id="servicos">
-  <div class="shell">
-    <h2 class="reveal">Três frentes de entrega.</h2>
-    <p class="reveal">Tessumax pensa em manutenção desde o dia 1. O mesmo parceiro do desenho à release.</p>
-    <div class="cols">
-      <article class="reveal">
-        <h3>Sites que convencem</h3>
-        <p>Landing pages, portfólios e páginas de negócio com velocidade alta e medida de propósito. SEO básico, métricas e UTMs desde o dia 1.</p>
-      </article>
-      <article class="reveal">
-        <h3>Sistemas sob medida</h3>
-        <p>APIs REST, painéis, dashboards, ferramentas internas. Java, TypeScript, Python. Código entregue em repositório com histórico e documentação.</p>
-      </article>
-      <article class="reveal">
-        <h3>Apps para todos os lados</h3>
-        <p>PWA offline-first e apps móveis (Expo/React Native) quando for o caso. Fluxos que você pode testar antes de pagar a última parcela.</p>
-      </article>
-    </div>
-  </div>
-</section>
+<main id="conteudo">
 
-<section class="process">
-  <div class="shell">
-    <div class="head">
-      <span class="kicker" style="color:#7a7a80">Como funciona</span>
-      <h2 class="reveal">Processo claro, sem surpresa.</h2>
-    </div>
-    <div class="steps">
-      <div class="step reveal">
-        <div>
-          <h3>Escopo</h3>
-          <p>Conversa inicial para entender o problema, prazo e entregáveis. Orçamento honesto antes de começar.</p>
-        </div>
-      </div>
-      <div class="step reveal">
-        <div>
-          <h3>Construção</h3>
-          <p>Desenvolvimento em ciclos curtos com atualizações regulares. Você vê o produto crescendo, não fica no escuro.</p>
-        </div>
-      </div>
-      <div class="step reveal">
-        <div>
-          <h3>Entrega</h3>
-          <p>Código em repositório, documentação mínima e suporte pós-lançamento. Outro dev consegue continuar sem perguntar.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-canvas-wrap" aria-hidden="true"><canvas id="heroCanvas"></canvas></div>
+    <div class="hero-halo" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      
 
-<section class="products" id="produtos">
-  <div class="shell">
-    <h2 class="reveal">Produtos no ar.</h2>
-    <p class="intro reveal">Dois produtos publicados e acessíveis hoje. Código aberto, deploy real, resultado verificável.</p>
-    <div class="grid-prod">
-      <article class="prod reveal">
-        <div>
-          <div class="top"><span class="lang">Curadoria</span></div>
-          <h3>Garimpo</h3>
-          <p>Curadoria de 131 ofertas Shopee com filtros, wishlist e SEO. 100% client-side, sem backend, sem dependência.</p>
-          <div class="links">
-            <a href="https://kelvinoliveiracode.github.io/garimpo/" target="_blank" rel="noopener">Abrir Garimpo</a>
-            <a href="https://github.com/KelvinOliveiraCode/garimpo" target="_blank" rel="noopener">Repositório</a>
+      <h1 class="hero-title">
+        <span class="word" style="--wi:0"><span>Do</span></span>
+        <span class="word" style="--wi:1"><span>brief</span></span>
+        <span class="word" style="--wi:2"><span>ao</span></span>
+        <span class="word" style="--wi:3"><span>lançamento.</span></span>
+      </h1>
+
+      <p class="hero-lede">Sites, sistemas, apps, vídeos e marketing com processo claro, código próprio e resultado verificável. Um único parceiro do desenho à release — software house em Belém, Pará.</p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contato">
+          Enviar brief
+          <svg class="od-icon btn-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+        </a>
+        <a class="btn btn-ghost" href="#produtos">Ver o que já está no ar</a>
+      </div>
+
+      <div class="hero-stats" role="list">
+        <div class="stat od-stat" role="listitem">
+          <span class="stat-num od-nowrap" data-count="45">0</span>
+          <span class="stat-label">tecnologias dominadas</span>
+        </div>
+        <div class="stat od-stat" role="listitem">
+          <span class="stat-num od-nowrap" data-count="2">20+</span>
+          <span class="stat-label">produtos no ar</span>
+        </div>
+        <div class="stat od-stat" role="listitem">
+          <span class="stat-num od-nowrap" data-count="20">0</span>
+          <span class="stat-label">nichos de modelos</span>
+        </div>
+        <div class="stat od-stat" role="listitem">
+          <span class="stat-num od-nowrap" data-count="131">0</span>
+          <span class="stat-label">ofertas curadas no Garimpo</span>
+        </div>
+      </div>
+
+      <p class="scroll-cue"><span class="scroll-cue-line" aria-hidden="true"></span>role para explorar</p>
+    </div>
+
+    <div class="container">
+      <div class="marquee" data-marquee="" aria-hidden="true">
+        <div class="marquee-row">
+          <div class="marquee-track">
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/python.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Python</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/typescript.svg" alt="" width="20" height="20" loading="lazy" decoding="async">TypeScript</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/java.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Java</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/react.svg" alt="" width="20" height="20" loading="lazy" decoding="async">React</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/rust.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Rust</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/springboot.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Spring Boot</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/postgresql.svg" alt="" width="20" height="20" loading="lazy" decoding="async">PostgreSQL</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/docker.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Docker</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/expo.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Expo</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/tauri.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Tauri</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/javascript.svg" alt="" width="20" height="20" loading="lazy" decoding="async">JavaScript</span>
+            <span class="marquee-item"><img class="logo-img" src="assets/logos/nodejs.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Node.js</span>
           </div>
         </div>
-      </article>
-      <article class="prod reveal">
-        <div>
-          <div class="top"><span class="lang">Plataforma</span></div>
-          <h3>KODAROS</h3>
-          <p>Plataforma com 8 e-books, diagnóstico interativo e ferramentas de negócio. Landing page com funil de diagnóstico.</p>
-          <div class="links">
-            <a href="https://kelvinoliveiracode.github.io/kodaros-landing/" target="_blank" rel="noopener">Abrir KODAROS</a>
-            <a href="https://github.com/KelvinOliveiraCode/kodaros-landing" target="_blank" rel="noopener">Repositório</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRENTES DE ENTREGA (ABAS) -->
+  <section class="section section--alt" id="frentes">
+    <div class="container">
+      <div class="section-head" data-reveal="">
+        <p class="eyebrow">Como entregamos</p>
+        <h2 class="section-title">Quatro frentes, um só parceiro.</h2>
+        <p class="section-sub">A Tessumax pensa em manutenção desde o dia 1. Escolha a frente e veja exatamente o que entra na entrega.</p>
+      </div>
+
+      <div class="tabs" data-tabs="" id="frentesTabs">
+        <div class="tablist" role="tablist" aria-label="Frentes de entrega">
+          <button class="tab" type="button" role="tab" id="tab-sites" data-tab="sites" aria-controls="panel-sites" aria-selected="true"><span class="tab-index">01</span>Sites</button>
+          <button class="tab" type="button" role="tab" id="tab-sistemas" data-tab="sistemas" aria-controls="panel-sistemas" aria-selected="false" tabindex="-1"><span class="tab-index">02</span>Sistemas</button>
+          <button class="tab" type="button" role="tab" id="tab-apps" data-tab="apps" aria-controls="panel-apps" aria-selected="false" tabindex="-1"><span class="tab-index">03</span>Apps</button>
+          <button class="tab" type="button" role="tab" id="tab-video" data-tab="video" aria-controls="panel-video" aria-selected="false" tabindex="-1"><span class="tab-index">04</span>Vídeo &amp; Marketing</button>
+        </div>
+
+        <div class="tabpanel" role="tabpanel" id="panel-sites" aria-labelledby="tab-sites" tabindex="0">
+          <div class="panel-grid">
+            <div>
+              <p class="panel-lede">Sites que convencem: páginas rápidas, medidas de propósito e prontas para ranquear desde o primeiro dia.</p>
+              <ul class="deliverables">
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Layout responsivo desenhado para o seu conteúdo, não um template genérico</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Performance medida: sem framework pesado quando ele não é necessário</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>SEO técnico: semântica, títulos, sitemap, dados estruturados e Open Graph</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Métricas e UTMs configurados desde o dia 1</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Deploy no seu domínio, com o repositório na sua mão</span></li>
+              </ul>
+            </div>
+            <aside class="panel-meta">
+              <div class="meta-row">
+                <span class="meta-label">Prazo típico</span>
+                <span class="meta-value">Do mesmo dia a 1 semana</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">Stack</span>
+                <div class="chip-row">
+                  <span class="chip"><img class="logo-img" src="assets/logos/html5.svg" alt="" width="14" height="14" loading="lazy">HTML5</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/css.svg" alt="" width="14" height="14" loading="lazy">CSS</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/javascript.svg" alt="" width="14" height="14" loading="lazy">JavaScript</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/tailwind.svg" alt="" width="14" height="14" loading="lazy">Tailwind</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/vite.svg" alt="" width="14" height="14" loading="lazy">Vite</span>
+                </div>
+              </div>
+              <a class="link-arrow" href="#contato">Quero um site <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a>
+            </aside>
           </div>
         </div>
-      </article>
-    </div>
-  </div>
 
-  <div class="shell" style="margin-top: 4rem;" id="exemplos">
-    <div style="padding-top: 3rem;">
-      <span class="kicker">Exemplos</span>
-      <h3 style="font-size: 1.5rem; margin: .5rem 0 .75rem; font-family: 'Space Grotesk', system-ui, sans-serif;">Exemplos de sites no ar</h3>
-      <p style="color: var(--text-secondary); max-width: 58ch; margin-bottom: 2rem; font-size: .95rem;">Estes são exemplos criados para demonstrar capacidade. São sites sem identidade visual específica. Sites para empresas reais seriam desenvolvidos sob medida, seguindo a identidade visual de cada cliente.</p>
-      <div class="carousel-wrapper" style="position: relative;">
-        <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Anterior" style="position: absolute; left: -1rem; top: 50%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-alt); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background .2s;">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="carousel-track" id="carouselTrack" style="display: flex; gap: .75rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: .5rem 0; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab;" tabindex="0" role="region" aria-label="Carrossel de exemplos de sites">
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/clinica-medica/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/clinica-medica.jpg" alt="Exemplo de site para clínica médica" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Clínica Médica</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/academia-fitness/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/academia-fitness.jpg" alt="Exemplo de site para academia" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Academia</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/advocacia/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/advogacia.jpg" alt="Exemplo de site para advocacia" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Advocacia</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/moda-ecommerce/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/moda-ecommerce.jpg" alt="Exemplo de site para moda" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Moda</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/cursos-ead/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/cursos-ead.jpg" alt="Exemplo de site para cursos" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Cursos</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/imobiliaria/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/imobiliaria.jpg" alt="Exemplo de site para imobiliária" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Imobiliária</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/estetica-beleza/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/estetica-beleza.jpg" alt="Exemplo de site para estética" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Estética</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/tech-saas/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/tech-saas.jpg" alt="Exemplo de site para SaaS" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">SaaS</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/restaurante-delivery/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/restaurante-delivery.jpg" alt="Exemplo de site para restaurante" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Restaurante</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/financas-investimentos/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/financas-investimentos.jpg" alt="Exemplo de site para finanças" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Finanças</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/casamento-eventos/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/casamento-eventos.jpg" alt="Exemplo de site para casamento" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Casamento</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/odontologia/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/odontologia.jpg" alt="Exemplo de site para odontologia" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Odontologia</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/marketing-digital/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/marketing-digital.jpg" alt="Exemplo de site para marketing digital" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Marketing</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/energia-solar/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/energia-solar.jpg" alt="Exemplo de site para energia solar" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Energia Solar</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/construcao-civil/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/construcao-civil.jpg" alt="Exemplo de site para construção civil" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Construção</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/viagens-turismo/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/viagens-turismo.jpg" alt="Exemplo de site para viagens" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Viagens</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/cripto-web3/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/cripto-web3.jpg" alt="Exemplo de site para cripto" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Cripto</div></div></a>
+        <div class="tabpanel" role="tabpanel" id="panel-sistemas" aria-labelledby="tab-sistemas" tabindex="0" hidden="">
+          <div class="panel-grid">
+            <div>
+              <p class="panel-lede">Sistemas sob medida: APIs, painéis e ferramentas internas que resolvem o processo — não um produto de prateleira.</p>
+              <ul class="deliverables">
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Modelagem de dados e regras de negócio documentadas</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>API REST com contrato claro e respostas padronizadas</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Painel administrativo com perfis de acesso e permissões</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Testes automatizados nos fluxos críticos e histórico no Git</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Documentação mínima: outro dev continua sem precisar perguntar</span></li>
+              </ul>
+            </div>
+            <aside class="panel-meta">
+              <div class="meta-row">
+                <span class="meta-label">Prazo típico</span>
+                <span class="meta-value">2 a 6 semanas</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">Stack</span>
+                <div class="chip-row">
+                  <span class="chip"><img class="logo-img" src="assets/logos/java.svg" alt="" width="14" height="14" loading="lazy">Java</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/springboot.svg" alt="" width="14" height="14" loading="lazy">Spring Boot</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/python.svg" alt="" width="14" height="14" loading="lazy">Python</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/postgresql.svg" alt="" width="14" height="14" loading="lazy">PostgreSQL</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/mysql.svg" alt="" width="14" height="14" loading="lazy">MySQL</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/docker.svg" alt="" width="14" height="14" loading="lazy">Docker</span>
+                </div>
+              </div>
+              <a class="link-arrow" href="#contato">Quero um sistema <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a>
+            </aside>
+          </div>
         </div>
-        <nav class="carousel-dots" id="carouselDots" style="display: flex; gap: .5rem; justify-content: center; margin-top: 1rem; align-items: center;">
-        </nav>
-        <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Próximo" style="position: absolute; right: -1rem; top: 50%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-alt); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background .2s;">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-      <p style="color: var(--muted); font-size: .8rem; margin-top: 1.5rem;"><a href="https://github.com/KelvinOliveiraCode/modelos-de-sites" target="_blank" rel="noopener" style="color: var(--text-secondary);">Ver repositório completo no GitHub</a></p>
-    </div>
-  </div>
-</section>
 
-<section class="stack" id="stack">
-  <div class="shell">
-    <div class="head">
-      <span class="kicker" style="color:#7a7a80">Stack</span>
-      <h2 class="reveal">Tecnologias dominadas.</h2>
-    </div>
-    <div class="grid-stack">
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/python" alt="Python" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Python</div><div class="tag">Backend, IA, Dados</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/javascript" alt="JavaScript" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">JavaScript</div><div class="tag">Frontend, Backend</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/typescript" alt="TypeScript" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">TypeScript</div><div class="tag">Frontend, Backend</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Java</div><div class="tag">Enterprise, APIs</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/rust" alt="Rust" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Rust</div><div class="tag">Sistema, Tauri</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/react" alt="React" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">React</div><div class="tag">UI, Componentes</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/nodedotjs" alt="Node.js" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Node.js</div><div class="tag">Runtime, APIs</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/docker" alt="Docker" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Docker</div><div class="tag">Containers</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">PostgreSQL</div><div class="tag">Banco de Dados</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/springboot" alt="Spring Boot" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Spring Boot</div><div class="tag">Java, APIs REST</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Tailwind</div><div class="tag">CSS, Utility-first</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/html5" alt="HTML5" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">HTML5</div><div class="tag">Semântica, SEO</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/css" alt="CSS" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">CSS</div><div class="tag">Layout, Animações</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/git" alt="Git" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Git</div><div class="tag">Versionamento</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/tauri" alt="Tauri" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Tauri</div><div class="tag">Desktop, Rust</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/vite" alt="Vite" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Vite</div><div class="tag">Build Tool</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/linux" alt="Linux" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Linux</div><div class="tag">Servidores, DevOps</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/mysql" alt="MySQL" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">MySQL</div><div class="tag">Banco de Dados</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/expo" alt="Expo" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Expo</div><div class="tag">React Native</div></div>
-      </div>
-      <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/ruby" alt="Ruby" width="32" height="32" loading="lazy"></div>
-        <div><div class="name">Ruby</div><div class="tag">Linguagem, Scripts</div></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section class="about" id="sobre">
-  <div class="shell">
-    <div>
-      <span class="kicker">Como trabalhamos</span>
-      <h2 class="reveal">Projetos organizados de ponta a ponta.</h2>
-      <p class="reveal" style="font-size: 1.15rem; max-width: 62ch; margin-bottom: 1.5rem;">Antes do código: conversa, escopo, fluxo. Durante: atualizações curtas e sem jargão. Depois: documentação mínima para que qualquer dev continue sem perguntar.</p>
-      <p class="reveal" style="font-size: 1.15rem; max-width: 62ch; margin-bottom: 1.5rem;">Não prometemos velocidade impossível. Prazo honesto e um produto que não exige manutenção porque ninguém lembrava o where-and-what.</p>
-      <p class="reveal" style="font-size: 1.15rem; max-width: 62ch;">O processo é transparente do início ao fim. Você acompanha cada etapa, decide junto, e recebe um produto final que funciona de verdade.</p>
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contato" style="background: var(--bg); color: var(--text);">
-  <div class="shell">
-    <span class="kicker">Contato</span>
-    <h2 class="reveal" style="font-size: clamp(2.2rem, 4.5vw, 5rem); margin-bottom: 1rem; color: var(--text);">Envie um brief e crie seu projeto conosco.</h2>
-    <p class="lead reveal" style="font-size: 1.15rem; color: var(--text-secondary); max-width: 52ch; margin-bottom: 2rem;">Diga o problema, o prazo e o que você já tem (marca, dados, prints). Respondemos em até dois dias úteis com perguntas de escopo real, não template.</p>
-    <div class="actions reveal" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem;">
-      <a class="btn-dark" href="https://wa.me/5591986134599?text=Ol%C3%A1%2C%20quero%20enviar%20um%20brief%20para%20o%20Tessumax" target="_blank" rel="noopener" style="background: var(--paper); color: var(--ink); padding: 1rem 1.6rem; border-radius: 999px; font-weight: 600; transition: transform .2s, background .2s;">Falar no WhatsApp</a>
-      <a href="https://github.com/KelvinOliveiraCode" target="_blank" rel="noopener" style="color: var(--text); padding: 1rem 1.6rem; border-radius: 999px; font-weight: 600; background: rgba(255,255,255,.03); transition: background .2s;">GitHub</a>
-    </div>
-    <div class="reveal" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 4rem; margin-bottom: 4rem; padding-top: 3rem;">
-      <div>
-        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; font-family: 'Space Grotesk', system-ui, sans-serif;">Redes sociais</h3>
-        <div style="display: flex; flex-wrap: wrap; gap: .75rem;">
-          <a href="https://instagram.com/tessumax" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border-radius: 999px; font-size: .85rem; font-weight: 500; transition: transform .25s; background: rgba(255,255,255,.03);"><img src="https://cdn.simpleicons.org/instagram" alt="Instagram" width="18" height="18" style="filter: brightness(0) invert(1);">Instagram</a>
-          <a href="https://tiktok.com/@tessumax" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border-radius: 999px; font-size: .85rem; font-weight: 500; transition: transform .25s; background: rgba(255,255,255,.03);"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok" width="18" height="18" style="filter: brightness(0) invert(1);">TikTok</a>
-          <a href="https://x.com/Tessumax" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border-radius: 999px; font-size: .85rem; font-weight: 500; transition: transform .25s; background: rgba(255,255,255,.03);"><img src="https://cdn.simpleicons.org/x" alt="X" width="18" height="18" style="filter: brightness(0) invert(1);">X</a>
-          <a href="https://facebook.com/TessumaxStudio" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border-radius: 999px; font-size: .85rem; font-weight: 500; transition: transform .25s; background: rgba(255,255,255,.03);"><img src="https://cdn.simpleicons.org/facebook" alt="Facebook" width="18" height="18" style="filter: brightness(0) invert(1);">Facebook</a>
-          <a href="https://www.linkedin.com/in/kelvin-oliveira-code/" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border-radius: 999px; font-size: .85rem; font-weight: 500; transition: transform .25s; background: rgba(255,255,255,.03);"><img src="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@latest/svgs/brands/linkedin.svg" alt="LinkedIn" width="18" height="18" style="filter: brightness(0) invert(1);">LinkedIn</a>
-          <a href="https://wa.me/5591986134599" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border-radius: 999px; font-size: .85rem; font-weight: 500; transition: transform .25s; background: rgba(255,255,255,.03);"><img src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp" width="18" height="18" style="filter: brightness(0) invert(1);">WhatsApp</a>
+        <div class="tabpanel" role="tabpanel" id="panel-apps" aria-labelledby="tab-apps" tabindex="0" hidden="">
+          <div class="panel-grid">
+            <div>
+              <p class="panel-lede">Apps para todos os lados: aplicativo móvel para iOS e Android, PWA offline-first quando o navegador basta e desktop quando o processo pede.</p>
+              <ul class="deliverables">
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>App móvel para iOS e Android em Expo/React Native — um só código, duas lojas</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>PWA instalável com cache offline e sincronização</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Build e publicação assistida na App Store e no Google Play</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Atualização OTA (EAS Update) sem esperar nova revisão de loja</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Notificações push, deep links e integração com o que você já usa</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Fluxos testáveis durante a construção, antes da última parcela</span></li>
+              </ul>
+            </div>
+            <aside class="panel-meta">
+              <div class="meta-row">
+                <span class="meta-label">Prazo típico</span>
+                <span class="meta-value">4 a 10 semanas</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">Stack</span>
+                <div class="chip-row">
+                  <span class="chip"><img class="logo-img" src="assets/logos/react.svg" alt="" width="14" height="14" loading="lazy">React</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/expo.svg" alt="" width="14" height="14" loading="lazy">Expo</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/typescript.svg" alt="" width="14" height="14" loading="lazy">TypeScript</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/nodejs.svg" alt="" width="14" height="14" loading="lazy">Node.js</span>
+                </div>
+              </div>
+              <a class="link-arrow" href="#contato">Quero um app <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a>
+            </aside>
+          </div>
         </div>
-      </div>
-      <div>
-        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; font-family: 'Space Grotesk', system-ui, sans-serif;">Links de entrega</h3>
-        <div style="display: flex; flex-direction: column; gap: .75rem;">
-          <a href="https://kelvinoliveiracode.github.io/portfolio/" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .75rem; padding: .75rem 1rem; border-radius: var(--radius-sm); transition: border-color .25s, transform .25s;"><img src="assets/logo.svg" alt="Portfólio" width="24" height="24" style="filter: invert(1);"><div><div style="font-size: .9rem; font-weight: 500;">Portfólio</div><div style="font-size: .75rem; color: var(--muted);">Kelvin Oliveira</div></div></a>
-          <a href="https://github.com/KelvinOliveiraCode/modelos-de-sites" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .75rem; padding: .75rem 1rem; border-radius: var(--radius-sm); transition: border-color .25s, transform .25s;"><img src="https://cdn.simpleicons.org/github" alt="GitHub" width="24" height="24" style="filter: brightness(0) invert(1);"><div><div style="font-size: .9rem; font-weight: 500;">Hub de Sites</div><div style="font-size: .75rem; color: var(--muted);">github.com/KelvinOliveiraCode/modelos-de-sites</div></div></a>
+
+        <div class="tabpanel" role="tabpanel" id="panel-video" aria-labelledby="tab-video" tabindex="0" hidden="">
+          <div class="panel-grid">
+            <div>
+              <p class="panel-lede">Vídeo e marketing que vendem: a peça publicitária, o corte para cada plataforma e o dado que mostra o que funcionou.</p>
+              <ul class="deliverables">
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Roteiro, direção e narração: da ideia ao vídeo pronto para anunciar</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Motion, animação e legendas no mesmo material — vertical, quadrado e 16:9</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Cortes por plataforma: Reels, TikTok, Shorts, YouTube e feed</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>SEO orgânico e GEO/AEO: a marca aparecendo também nas respostas de IA</span></li>
+                <li class="od-row-top" style="--od-gap:12px"><svg class="od-icon" style="--od-icon-size:15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg><span>Dados de busca, perfil da empresa e a página de conversão ligada ao vídeo</span></li>
+              </ul>
+            </div>
+            <aside class="panel-meta">
+              <div class="meta-row">
+                <span class="meta-label">Prazo típico</span>
+                <span class="meta-value">Combinado no escopo, conforme o número de peças</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">Stack</span>
+                <div class="chip-row">
+                  <span class="chip"><img class="logo-img" src="assets/logos/ffmpeg.svg" alt="" width="14" height="14" loading="lazy">FFmpeg</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/remotion.svg" alt="" width="14" height="14" loading="lazy">Remotion</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/hyperframes.svg" alt="" width="14" height="14" loading="lazy">HyperFrames</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/gsap.svg" alt="" width="14" height="14" loading="lazy">GSAP</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/gemini.svg" alt="" width="14" height="14" loading="lazy">Gemini</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/whisper.svg" alt="" width="14" height="14" loading="lazy">Whisper</span>
+                  <span class="chip"><img class="logo-img" src="assets/logos/threejs.svg" alt="" width="14" height="14" loading="lazy">Three.js</span>
+                </div>
+              </div>
+              <a class="link-arrow" href="#contato">Quero vídeo e marketing <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a>
+            </aside>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer class="site">
-  <div class="shell">
-    <div class="footer-copy">
-      <img src="assets/logo.svg" class="logo" alt="Tessumax">
-      <small>© 2026 Tessumax Studio · sites, sistemas e apps.</small>
-      <span class="credit"><a href="https://kelvinoliveiracode.github.io/portfolio/" target="_blank" rel="noopener">Feito por Kelvin Oliveira</a></span>
+  <!-- PROCESSO -->
+  <section class="section process" id="processo">
+    <div class="container">
+      <div class="section-head" data-reveal="">
+        <p class="eyebrow">Como funciona</p>
+        <h2 class="section-title">Processo claro, sem surpresa.</h2>
+        <p class="section-sub">Você acompanha cada etapa e decide junto. Nada de sumir por três semanas e voltar com uma surpresa desagradável.</p>
+      </div>
+
+      <div class="process-layout">
+        <div class="process-rail" id="processRail" aria-hidden="true">
+          <div class="process-rail-track"><span class="process-rail-fill"></span></div>
+        </div>
+        <div class="process-steps">
+          <article class="process-step" data-process-step="" data-reveal="">
+            <span class="step-num od-nowrap">Etapa 01</span>
+            <h3 class="step-title">Escopo</h3>
+            <p class="step-body">Conversa inicial para entender o problema, o prazo e os entregáveis. Você recebe um orçamento honesto antes de qualquer linha de código ser escrita.</p>
+          </article>
+          <article class="process-step" data-process-step="" data-reveal="">
+            <span class="step-num od-nowrap">Etapa 02</span>
+            <h3 class="step-title">Construção</h3>
+            <p class="step-body">Desenvolvimento em ciclos curtos com atualizações regulares. Você vê o produto crescendo e testa os fluxos no meio do caminho, não só no fim.</p>
+          </article>
+          <article class="process-step" data-process-step="" data-reveal="">
+            <span class="step-num od-nowrap">Etapa 03</span>
+            <h3 class="step-title">Entrega</h3>
+            <p class="step-body">Código no seu repositório com histórico, documentação mínima e suporte pós-lançamento. Outro desenvolvedor consegue continuar sem precisar perguntar.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUTOS -->
+  <section class="section section--alt" id="produtos">
+    <div class="container">
+      <div class="section-head" data-reveal="">
+        <p class="eyebrow">Produtos no ar</p>
+        <h2 class="section-title">Dois produtos publicados e verificáveis.</h2>
+        <p class="section-sub">Código aberto, deploy real e resultado que você pode abrir agora mesmo no navegador.</p>
+      </div>
+
+      <div class="tabs" data-tabs="">
+        <div class="tablist" role="tablist" aria-label="Produtos">
+          <button class="tab" type="button" role="tab" id="tab-garimpo" data-tab="garimpo" aria-controls="panel-garimpo" aria-selected="true"><span class="tab-index">01</span>Garimpo</button>
+          <button class="tab" type="button" role="tab" id="tab-kodaros" data-tab="kodaros" aria-controls="panel-kodaros" aria-selected="false" tabindex="-1"><span class="tab-index">02</span>KODAROS</button>
+        </div>
+
+        <div class="tabpanel" role="tabpanel" id="panel-garimpo" aria-labelledby="tab-garimpo" tabindex="0">
+          <article class="product-card">
+            <div class="product-head">
+              <p class="eyebrow">Curadoria</p>
+              <h3 class="product-name">Garimpo</h3>
+              <p class="product-body">Curadoria de 131 ofertas da Shopee com filtros, wishlist e SEO. Roda 100% no navegador: sem backend, sem servidor para manter, sem dependência externa.</p>
+            </div>
+            <div class="product-facts">
+              <div class="fact od-field"><span class="fact-num od-nowrap">131</span><span class="fact-label">ofertas curadas</span></div>
+              <div class="fact od-field"><span class="fact-num od-nowrap">0</span><span class="fact-label">backends</span></div>
+              <div class="fact od-field"><span class="fact-num od-nowrap">100%</span><span class="fact-label">client-side</span></div>
+            </div>
+            <div class="product-actions">
+              <a class="btn btn-primary btn-sm" href="https://kelvinoliveiracode.github.io/garimpo/" target="_blank" rel="noopener">Abrir Garimpo</a>
+              <a class="btn btn-ghost btn-sm" href="https://github.com/KelvinOliveiraCode/garimpo" target="_blank" rel="noopener">Ver repositório</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="tabpanel" role="tabpanel" id="panel-kodaros" aria-labelledby="tab-kodaros" tabindex="0" hidden="">
+          <article class="product-card">
+            <div class="product-head">
+              <p class="eyebrow">Plataforma</p>
+              <h3 class="product-name">KODAROS</h3>
+              <p class="product-body">Plataforma com 8 e-books, diagnóstico interativo e ferramentas de negócio. A landing page conduz o visitante por um funil de diagnóstico até a recomendação.</p>
+            </div>
+            <div class="product-facts">
+              <div class="fact od-field"><span class="fact-num od-nowrap">8</span><span class="fact-label">e-books</span></div>
+              <div class="fact od-field"><span class="fact-num od-nowrap">1</span><span class="fact-label">funil de diagnóstico</span></div>
+              <div class="fact od-field"><span class="fact-num od-nowrap">100%</span><span class="fact-label">no ar agora</span></div>
+            </div>
+            <div class="product-actions">
+              <a class="btn btn-primary btn-sm" href="https://kelvinoliveiracode.github.io/kodaros-landing/" target="_blank" rel="noopener">Abrir KODAROS</a>
+              <a class="btn btn-ghost btn-sm" href="https://github.com/KelvinOliveiraCode/kodaros-landing" target="_blank" rel="noopener">Ver repositório</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXEMPLOS -->
+  <section class="section" id="exemplos">
+    <div class="container">
+      <div class="rail-head" data-reveal="">
+        <div class="section-head" style="margin-bottom:0">
+          <p class="eyebrow">Acervo</p>
+          <h2 class="section-title">Modelos por nicho, no ar.</h2>
+          <p class="section-sub">Uma amostra do acervo de modelos já publicados — cada um abre no navegador, com link direto.</p>
+        </div>
+        <div class="rail-controls">
+          <button class="rail-btn" type="button" data-rail-prev="" aria-label="Ver exemplos anteriores">
+            <svg class="od-icon" style="--od-icon-size:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 6 9 12l6 6"></path></svg>
+          </button>
+          <button class="rail-btn" type="button" data-rail-next="" aria-label="Ver próximos exemplos">
+            <svg class="od-icon" style="--od-icon-size:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="od-rail rail-track" data-rail="" style="--od-rail-pad:0px" aria-label="Modelos de sites por nicho">
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/clinica-medica/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/clinica-medica.png" alt="Modelo de site para clínica médica" width="800" height="800" decoding="async" fetchpriority="high"></div>
+          <div class="rail-caption"><span class="rail-name">Clínica Médica</span><span class="rail-index od-nowrap">01</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/academia-fitness/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/academia-fitness.png" alt="Modelo de site para academia" width="800" height="800" decoding="async" fetchpriority="high"></div>
+          <div class="rail-caption"><span class="rail-name">Academia</span><span class="rail-index od-nowrap">02</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/advocacia/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/advogacia.png" alt="Modelo de site para advocacia" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Advocacia</span><span class="rail-index od-nowrap">03</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/moda-ecommerce/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/moda-ecommerce.png" alt="Modelo de site para moda" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Moda</span><span class="rail-index od-nowrap">04</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/cursos-ead/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/cursos-ead.png" alt="Modelo de site para cursos a distância" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Cursos</span><span class="rail-index od-nowrap">05</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/imobiliaria/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/imobiliaria.png" alt="Modelo de site para imobiliária" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Imobiliária</span><span class="rail-index od-nowrap">06</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/estetica-beleza/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/estetica-beleza.png" alt="Modelo de site para estética e beleza" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Estética</span><span class="rail-index od-nowrap">07</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/tech-saas/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/tech-saas.png" alt="Modelo de site para SaaS" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">SaaS</span><span class="rail-index od-nowrap">08</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/restaurante-delivery/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/restaurante-delivery.png" alt="Modelo de site para restaurante com delivery" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Restaurante</span><span class="rail-index od-nowrap">09</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/financas-investimentos/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/financas-investimentos.png" alt="Modelo de site para finanças e investimentos" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Finanças</span><span class="rail-index od-nowrap">10</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/casamento-eventos/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/casamento-eventos.png" alt="Modelo de site para casamento e eventos" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Casamento</span><span class="rail-index od-nowrap">11</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/odontologia/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/odontologia.png" alt="Modelo de site para odontologia" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Odontologia</span><span class="rail-index od-nowrap">12</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/marketing-digital/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/marketing-digital.png" alt="Modelo de site para marketing digital" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Marketing</span><span class="rail-index od-nowrap">13</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/energia-solar/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/energia-solar.png" alt="Modelo de site para energia solar" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Energia Solar</span><span class="rail-index od-nowrap">14</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/construcao-civil/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/construcao-civil.png" alt="Modelo de site para construção civil" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Construção</span><span class="rail-index od-nowrap">15</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/viagens-turismo/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/viagens-turismo.png" alt="Modelo de site para viagens e turismo" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Viagens</span><span class="rail-index od-nowrap">16</span></div>
+        </a>
+        <a class="rail-item" href="https://kelvinoliveiracode.github.io/modelos-de-sites/cripto-web3/" target="_blank" rel="noopener">
+          <div class="rail-thumb"><img src="assets/screens/cripto-web3.png" alt="Modelo de site para cripto e web3" width="800" height="800" loading="lazy" decoding="async"></div>
+          <div class="rail-caption"><span class="rail-name">Cripto</span><span class="rail-index od-nowrap">17</span></div>
+        </a>
+      </div>
+
+      <p class="rail-note" data-reveal="">Estes modelos existem para demonstrar capacidade técnica: são páginas sem identidade visual de cliente. Um site para empresa real é desenvolvido sob medida, seguindo a marca de cada negócio.
+        <a class="link-arrow" href="https://github.com/KelvinOliveiraCode/modelos-de-sites" target="_blank" rel="noopener">Ver o acervo completo no GitHub
+          <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="section section--deep" id="stack">
+    <div class="container">
+      <div class="section-head" data-reveal="">
+        <p class="eyebrow">Stack</p>
+        <h2 class="section-title">Tecnologias dominadas.</h2>
+        <p class="section-sub">Ferramenta escolhida pelo problema, não por moda. Filtre por área para ver onde cada uma entra.</p>
+      </div>
+
+      <div data-filter-group="#stackGrid">
+        <div class="filter-bar od-cluster" style="--od-gap:8px" role="group" aria-label="Filtrar tecnologias por área">
+          <button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">Todas</button>
+          <button class="filter-chip" type="button" data-filter="frontend" aria-pressed="false">Frontend</button>
+          <button class="filter-chip" type="button" data-filter="backend" aria-pressed="false">Backend</button>
+          <button class="filter-chip" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
+          <button class="filter-chip" type="button" data-filter="desktop" aria-pressed="false">Desktop</button>
+          <button class="filter-chip" type="button" data-filter="dados" aria-pressed="false">Dados</button>
+          <button class="filter-chip" type="button" data-filter="infra" aria-pressed="false">Infra</button>
+          <button class="filter-chip" type="button" data-filter="video" aria-pressed="false">Vídeo</button>
+          <button class="filter-chip" type="button" data-filter="ia" aria-pressed="false">IA</button>
+          <button class="filter-chip" type="button" data-filter="marketing" aria-pressed="false">Marketing</button>
+        </div>
+        <p class="filter-live" data-filter-count="" aria-live="polite">45 tecnologias exibidas</p>
+      </div>
+
+      <p class="notice" role="note">
+        <span class="notice-tag">Aviso</span>
+        <span>A stack varia conforme o projeto. Estas são as ferramentas que uso com mais frequência, não uma lista fechada: o que entra em cada entrega é decidido no escopo.</span>
+      </p>
+
+      <div class="stack-grid" id="stackGrid" data-reveal="">
+        <article class="tech od-tile" data-category="backend dados">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/python.svg" alt="Python" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Python</h3>
+          <p class="tech-role">Backend, IA, dados</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend backend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/javascript.svg" alt="JavaScript" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">JavaScript</h3>
+          <p class="tech-role">Frontend, backend</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend backend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/typescript.svg" alt="TypeScript" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">TypeScript</h3>
+          <p class="tech-role">Frontend, backend</p>
+        </article>
+        <article class="tech od-tile" data-category="backend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/java.svg" alt="Java" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Java</h3>
+          <p class="tech-role">Enterprise, APIs</p>
+        </article>
+        <article class="tech od-tile" data-category="desktop backend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/rust.svg" alt="Rust" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Rust</h3>
+          <p class="tech-role">Sistemas, Tauri</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend mobile">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/react.svg" alt="React" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">React</h3>
+          <p class="tech-role">UI, componentes</p>
+        </article>
+        <article class="tech od-tile" data-category="backend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/nodejs.svg" alt="Node.js" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Node.js</h3>
+          <p class="tech-role">Runtime, APIs</p>
+        </article>
+        <article class="tech od-tile" data-category="infra">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/docker.svg" alt="Docker" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Docker</h3>
+          <p class="tech-role">Containers</p>
+        </article>
+        <article class="tech od-tile" data-category="dados">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/postgresql.svg" alt="PostgreSQL" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">PostgreSQL</h3>
+          <p class="tech-role">Banco de dados</p>
+        </article>
+        <article class="tech od-tile" data-category="backend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/springboot.svg" alt="Spring Boot" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Spring Boot</h3>
+          <p class="tech-role">Java, APIs REST</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/tailwind.svg" alt="Tailwind CSS" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Tailwind</h3>
+          <p class="tech-role">CSS, utility-first</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/html5.svg" alt="HTML5" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">HTML5</h3>
+          <p class="tech-role">Semântica, SEO</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/css.svg" alt="CSS" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">CSS</h3>
+          <p class="tech-role">Layout, animações</p>
+        </article>
+        <article class="tech od-tile" data-category="infra">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/git.svg" alt="Git" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Git</h3>
+          <p class="tech-role">Versionamento</p>
+        </article>
+        <article class="tech od-tile" data-category="desktop">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/tauri.svg" alt="Tauri" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Tauri</h3>
+          <p class="tech-role">Desktop, Rust</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend infra">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/vite.svg" alt="Vite" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Vite</h3>
+          <p class="tech-role">Build tool</p>
+        </article>
+        <article class="tech od-tile" data-category="infra">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/linux.svg" alt="Linux" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Linux</h3>
+          <p class="tech-role">Servidores, DevOps</p>
+        </article>
+        <article class="tech od-tile" data-category="dados">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/mysql.svg" alt="MySQL" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">MySQL</h3>
+          <p class="tech-role">Banco de dados</p>
+        </article>
+        <article class="tech od-tile" data-category="mobile">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/expo.svg" alt="Expo" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Expo</h3>
+          <p class="tech-role">React Native</p>
+        </article>
+        <article class="tech od-tile" data-category="backend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/ruby.svg" alt="Ruby" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Ruby</h3>
+          <p class="tech-role">Linguagem, scripts</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/nextjs.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Next.js</h3>
+          <p class="tech-role">React, produção</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/astro.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Astro</h3>
+          <p class="tech-role">Sites estáticos</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend video">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/gsap.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">GSAP</h3>
+          <p class="tech-role">Animação, timelines</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend video">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/threejs.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Three.js</h3>
+          <p class="tech-role">3D no navegador</p>
+        </article>
+        <article class="tech od-tile" data-category="video">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/p5js.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">p5.js</h3>
+          <p class="tech-role">Arte generativa</p>
+        </article>
+        <article class="tech od-tile" data-category="video">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/lottie.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Lottie</h3>
+          <p class="tech-role">Animação vetorial</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend video">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/framer.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Framer Motion</h3>
+          <p class="tech-role">Motion em React</p>
+        </article>
+        <article class="tech od-tile" data-category="video">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/remotion.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Remotion</h3>
+          <p class="tech-role">Vídeo em React</p>
+        </article>
+        <article class="tech od-tile" data-category="video">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/hyperframes.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">HyperFrames</h3>
+          <p class="tech-role">Vídeo em HTML</p>
+        </article>
+        <article class="tech od-tile" data-category="video infra">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/ffmpeg.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">FFmpeg</h3>
+          <p class="tech-role">Edição, legendas, render</p>
+        </article>
+        <article class="tech od-tile" data-category="ia video">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/whisper.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Whisper</h3>
+          <p class="tech-role">Transcrição de áudio</p>
+        </article>
+        <article class="tech od-tile" data-category="ia">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/gemini.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Gemini</h3>
+          <p class="tech-role">Narração, pesquisa com IA</p>
+        </article>
+        <article class="tech od-tile" data-category="backend dados">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/supabase.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Supabase</h3>
+          <p class="tech-role">Auth, dados, realtime</p>
+        </article>
+        <article class="tech od-tile" data-category="backend">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/stripe.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Stripe</h3>
+          <p class="tech-role">Pagamentos</p>
+        </article>
+        <article class="tech od-tile" data-category="infra">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/npm.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">npm</h3>
+          <p class="tech-role">Pacotes, scripts</p>
+        </article>
+        <article class="tech od-tile" data-category="infra">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/playwright.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Playwright</h3>
+          <p class="tech-role">QA e automação</p>
+        </article>
+        <article class="tech od-tile" data-category="infra">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/puppeteer.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Puppeteer</h3>
+          <p class="tech-role">Automação headless</p>
+        </article>
+        <article class="tech od-tile" data-category="dados ia">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/opencv.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">OpenCV</h3>
+          <p class="tech-role">Visão computacional</p>
+        </article>
+        <article class="tech od-tile" data-category="dados">
+          <div class="tech-logo"><span class="tech-mono" aria-hidden="true">TS</span></div>
+          <h3 class="tech-name">Tesseract OCR</h3>
+          <p class="tech-role">OCR de documentos</p>
+        </article>
+        <article class="tech od-tile" data-category="infra">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/cloudflare.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Cloudflare</h3>
+          <p class="tech-role">Deploy e edge</p>
+        </article>
+        <article class="tech od-tile" data-category="frontend video">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/figma.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Figma</h3>
+          <p class="tech-role">Design e handoff</p>
+        </article>
+        <article class="tech od-tile" data-category="marketing">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/searchconsole.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Search Console</h3>
+          <p class="tech-role">SEO, indexação</p>
+        </article>
+        <article class="tech od-tile" data-category="marketing">
+          <div class="tech-logo"><img class="logo-img" src="assets/logos/gbp.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></div>
+          <h3 class="tech-name">Perfil da Empresa</h3>
+          <p class="tech-role">SEO local no Maps</p>
+        </article>
+        <article class="tech od-tile" data-category="marketing">
+          <div class="tech-logo"><span class="tech-mono" aria-hidden="true">DF</span></div>
+          <h3 class="tech-name">DataForSEO</h3>
+          <p class="tech-role">SERP e backlinks</p>
+        </article>
+        <article class="tech od-tile" data-category="marketing">
+          <div class="tech-logo"><span class="tech-mono" aria-hidden="true">SEO</span></div>
+          <h3 class="tech-name">OpenSEO</h3>
+          <p class="tech-role">SEO com dados</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="section" id="sobre">
+    <div class="container">
+      <div class="section-head" data-reveal="">
+        <p class="eyebrow">Quem faz</p>
+        <h2 class="section-title">Kelvin Oliveira, fundador da Tessumax.</h2>
+        <p class="section-sub">Desenvolvedor de produtos digitais em Belém/PA: dados, IA e software sob medida. A Tessumax é a empresa que dá nome a esse trabalho.</p>
+      </div>
+
+      <div class="founder">
+        <div class="founder-card" data-reveal="">
+          <div class="founder-monogram" aria-hidden="true">KO</div>
+          <div class="od-stack" style="--od-gap:6px">
+            <h3 class="founder-name">Kelvin Oliveira</h3>
+            <p class="founder-role">Fundador · CEO · Tessumax</p>
+          </div>
+          <p class="founder-body">Trabalho do escopo à release no mesmo lugar: entender o processo, desenhar a solução, escrever o código e deixar o rastro documentado para quem continuar depois. Os repositórios públicos mostram o método — do planejador de rack ao pipeline de detecção.</p>
+          <div class="founder-links">
+            <a class="btn btn-ghost btn-sm" href="https://github.com/KelvinOliveiraCode" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn btn-ghost btn-sm" href="https://www.linkedin.com/in/kelvin-oliveira-code/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn-ghost btn-sm" href="https://kelvinoliveiracode.github.io/portfolio/" target="_blank" rel="noopener">Portfólio</a>
+          </div>
+        </div>
+
+        <div class="metrics" data-reveal="">
+          <div class="metric od-field">
+            <span class="metric-num od-nowrap" data-count="2">0</span>
+            <span class="metric-label">dias úteis para responder a um brief</span>
+          </div>
+          <div class="metric od-field">
+            <span class="metric-num od-nowrap" data-count="1">0</span>
+            <span class="metric-label">parceiro do desenho à release</span>
+          </div>
+          <div class="metric od-field">
+            <span class="metric-num od-nowrap">0</span>
+            <span class="metric-label">dependências nesta página</span>
+          </div>
+          <div class="metric od-field">
+            <span class="metric-num od-nowrap" style="margin-left: -12px;">100%</span>
+            <span class="metric-label">do código no seu repositório</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS: textos de exemplo escritos para o layout. Substituir pelas falas reais dos clientes antes de publicar. -->
+  <section class="section section--deep" id="depoimentos">
+    <div class="container">
+      <div class="section-head" data-reveal="">
+        <p class="eyebrow">Depoimentos</p>
+        <h2 class="section-title">O que dizem sobre o trabalho.</h2>
+        <p class="section-sub">Relatos de quem passou pelo processo — do brief à publicação.</p>
+      </div>
+
+      <div class="quote-grid" data-reveal="">
+        <figure class="quote">
+          <span class="quote-num">01</span>
+          <blockquote class="quote-body"><p>O site antigo não aparecia e eu não conseguia mexer em nada. Em uma semana estava novo, no ar, e eu mesmo troco os textos quando quero.</p></blockquote>
+          <figcaption class="quote-attr">
+            <span class="quote-role">CEO</span>
+            <span class="quote-seg">varejo</span>
+          </figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="quote-num">02</span>
+          <blockquote class="quote-body"><p>A campanha saiu com corte para cada rede. Uma produção virou cinco peças, e agora eu consigo ver qual delas traz conversa no WhatsApp.</p></blockquote>
+          <figcaption class="quote-attr">
+            <span class="quote-role">Gerente de marketing</span>
+            <span class="quote-seg">indústria</span>
+          </figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="quote-num">03</span>
+          <blockquote class="quote-body"><p>Mandei o escopo e recebi de volta prazo, valor e o que ficava fora do pacote. Foi a primeira vez que não precisei caçar resposta no meio do projeto.</p></blockquote>
+          <figcaption class="quote-attr">
+            <span class="quote-role">Sócio-fundador</span>
+            <span class="quote-seg">agência</span>
+          </figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="quote-num">04</span>
+          <blockquote class="quote-body"><p>O código chegou no nosso repositório com README e testes nos fluxos críticos. A equipe continuou sem depender de ninguém.</p></blockquote>
+          <figcaption class="quote-attr">
+            <span class="quote-role">Desenvolvedor</span>
+            <span class="quote-seg">software house</span>
+          </figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="quote-num">05</span>
+          <blockquote class="quote-body"><p>O painel substituiu três planilhas e um caderno. O fechamento que tomava a manhã inteira agora sai em dois cliques.</p></blockquote>
+          <figcaption class="quote-attr">
+            <span class="quote-role">Coordenadora de operações</span>
+            <span class="quote-seg">logística</span>
+          </figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="quote-num">06</span>
+          <blockquote class="quote-body"><p>O agendamento no celular cortou as faltas. O paciente confirma sozinho e o lembrete chega na hora certa.</p></blockquote>
+          <figcaption class="quote-attr">
+            <span class="quote-role">Dentista</span>
+            <span class="quote-seg">consultório próprio</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--alt" id="faq">
+    <div class="container container-narrow">
+      <div class="section-head" data-reveal="">
+        <p class="eyebrow">Dúvidas</p>
+        <h2 class="section-title">Perguntas diretas, respostas diretas.</h2>
+      </div>
+
+      <div class="od-stack" style="--od-gap:0" data-accordion="single" data-reveal="">
+        <div class="acc-item" data-accordion-item="">
+          <h3 style="margin:0"><button class="acc-trigger" type="button" data-accordion-trigger="" aria-expanded="false" aria-controls="faq-1">Quanto tempo leva um projeto?
+            <svg class="od-icon acc-icon" style="--od-icon-size:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"></path></svg>
+          </button></h3>
+          <div class="acc-panel" data-accordion-panel="" id="faq-1" aria-hidden="true"><div><p class="acc-inner">Depende do escopo. Sites costumam ficar prontos do mesmo dia a 1 semana; sistemas sob medida, de 2 a 6 semanas; apps, de 4 a 10. Vídeo e marketing entram conforme o número de peças. O prazo é combinado no escopo, antes de começar — e você acompanha o andamento em ciclos curtos.</p></div></div>
+        </div>
+        <div class="acc-item" data-accordion-item="">
+          <h3 style="margin:0"><button class="acc-trigger" type="button" data-accordion-trigger="" aria-expanded="false" aria-controls="faq-2">Como funciona o orçamento?
+            <svg class="od-icon acc-icon" style="--od-icon-size:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"></path></svg>
+          </button></h3>
+          <div class="acc-panel" data-accordion-panel="" id="faq-2" aria-hidden="true"><div><p class="acc-inner">Você recebe o orçamento fechado por etapa antes de qualquer linha de código. Sem hora surpresa e sem cobrança por reunião: o que foi combinado no escopo é o que vale.</p></div></div>
+        </div>
+        <div class="acc-item" data-accordion-item="">
+          <h3 style="margin:0"><button class="acc-trigger" type="button" data-accordion-trigger="" aria-expanded="false" aria-controls="faq-3">De quem fica o código?
+            <svg class="od-icon acc-icon" style="--od-icon-size:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"></path></svg>
+          </button></h3>
+          <div class="acc-panel" data-accordion-panel="" id="faq-3" aria-hidden="true"><div><p class="acc-inner">Seu. O projeto vai para um repositório com histórico de commits, documentação mínima e instruções de deploy. Outro desenvolvedor consegue continuar sem precisar perguntar nada.</p></div></div>
+        </div>
+        <div class="acc-item" data-accordion-item="">
+          <h3 style="margin:0"><button class="acc-trigger" type="button" data-accordion-trigger="" aria-expanded="false" aria-controls="faq-4">E depois do lançamento?
+            <svg class="od-icon acc-icon" style="--od-icon-size:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"></path></svg>
+          </button></h3>
+          <div class="acc-panel" data-accordion-panel="" id="faq-4" aria-hidden="true"><div><p class="acc-inner">Há suporte pós-lançamento e é possível manter ciclos de manutenção e evolução. Como o projeto nasce documentado e com código próprio, a manutenção não depende de quem escreveu.</p></div></div>
+        </div>
+        <div class="acc-item" data-accordion-item="">
+          <h3 style="margin:0"><button class="acc-trigger" type="button" data-accordion-trigger="" aria-expanded="false" aria-controls="faq-5">Preciso chegar com marca, textos e fotos prontos?
+            <svg class="od-icon acc-icon" style="--od-icon-size:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"></path></svg>
+          </button></h3>
+          <div class="acc-panel" data-accordion-panel="" id="faq-5" aria-hidden="true"><div><p class="acc-inner">Não. Dá para começar por um brief informal — o problema, o prazo e o que já existe (marca, dados, prints). O escopo organiza o resto antes da construção.</p></div></div>
+        </div>
+        <div class="acc-item" data-accordion-item="">
+          <h3 style="margin:0"><button class="acc-trigger" type="button" data-accordion-trigger="" aria-expanded="false" aria-controls="faq-6">Consigo testar antes de pagar a última parcela?
+            <svg class="od-icon acc-icon" style="--od-icon-size:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"></path></svg>
+          </button></h3>
+          <div class="acc-panel" data-accordion-panel="" id="faq-6" aria-hidden="true"><div><p class="acc-inner">Sim. Os fluxos ficam acessíveis durante a construção, não só no final. Você testa, aponta o que ajustar e o pagamento final acontece com o produto funcionando na sua mão.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="section" id="contato">
+    <div class="container">
+      <div class="section-head" data-reveal="">
+        <p class="eyebrow">Contato</p>
+        <h2 class="section-title">Envie um brief e crie seu projeto conosco.</h2>
+        <p class="section-sub">Diga o problema, o prazo e o que você já tem. A resposta volta com perguntas de escopo real — não com template.</p>
+      </div>
+
+      <div class="contact-grid">
+        <form class="brief-form" id="briefForm" novalidate="" data-reveal="">
+          <div class="form-grid">
+            <div class="field od-field">
+              <label class="field-label" for="fieldNome">Nome <span aria-hidden="true">·</span> obrigatório</label>
+              <input class="input" id="fieldNome" name="nome" type="text" autocomplete="name" required="" aria-describedby="error-nome">
+              <span class="field-error" id="error-nome" data-error-for="nome" hidden=""></span>
+            </div>
+
+            <div class="field od-field">
+              <label class="field-label" for="fieldContato">Contato <span aria-hidden="true">·</span> obrigatório</label>
+              <input class="input" id="fieldContato" name="contato" type="text" autocomplete="email" required="" aria-describedby="hint-contato error-contato" placeholder="voce@empresa.com ou (91) 9.....">
+              <span class="field-hint" id="hint-contato">E-mail ou WhatsApp com DDD — o que for mais rápido para você.</span>
+              <span class="field-error" id="error-contato" data-error-for="contato" hidden=""></span>
+            </div>
+
+            <div class="field od-field">
+              <label class="field-label" for="fieldTipo">Tipo de projeto</label>
+              <select class="select" id="fieldTipo" name="tipo">
+                <option value="">Selecione</option>
+                <option value="Site ou landing page">Site ou landing page</option>
+                <option value="Sistema ou API">Sistema ou API</option>
+                <option value="App ou PWA">App ou PWA</option>
+                <option value="Vídeo ou marketing">Vídeo ou marketing</option>
+                <option value="Ainda não sei">Ainda não sei</option>
+              </select>
+            </div>
+
+            <div class="field od-field">
+              <label class="field-label" for="fieldPrazo">Prazo desejado</label>
+              <select class="select" id="fieldPrazo" name="prazo">
+                <option value="">A definir</option>
+                <option value="O quanto antes">O quanto antes</option>
+                <option value="Em 1 a 2 meses">Em 1 a 2 meses</option>
+                <option value="Sem pressa">Sem pressa</option>
+              </select>
+            </div>
+
+            <div class="field od-field field-full">
+              <label class="field-label" for="fieldEscopo">O que você precisa <span aria-hidden="true">·</span> obrigatório</label>
+              <textarea class="textarea" id="fieldEscopo" name="escopo" required="" aria-describedby="hint-escopo error-escopo" placeholder="O problema, o que já existe (marca, dados, prints) e o que precisa funcionar no fim."></textarea>
+              <span class="field-hint" id="hint-escopo">Um parágrafo já basta.</span>
+              <span class="field-error" id="error-escopo" data-error-for="escopo" hidden=""></span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">
+              Enviar brief pelo WhatsApp
+              <svg class="od-icon btn-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+            </button>
+            <button class="btn btn-ghost" type="button" id="copyBrief">
+              Copiar resumo
+              <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="10" height="10" rx="2"></rect><path d="M15 5H7a2 2 0 0 0-2 2v8"></path></svg>
+            </button>
+          </div>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite" hidden=""></p>
+        </form>
+
+        <aside class="contact-aside" data-reveal="">
+          <div class="social-list">
+            <a class="social-link" href="https://wa.me/5591986134599?text=Ol%C3%A1%2C%20quero%20enviar%20um%20brief%20para%20a%20Tessumax" target="_blank" rel="noopener">
+              <img class="social-icon logo-img" src="assets/icons/whatsapp.svg" alt="" width="20" height="20" loading="lazy">
+              <span class="od-fill"><span class="social-name">WhatsApp</span><span class="social-handle od-truncate" title="+55 91 98613-4599">+55 91 98613-4599</span></span>
+              <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+            </a>
+            <a class="social-link" href="https://www.linkedin.com/in/kelvin-oliveira-code/" target="_blank" rel="noopener">
+              <img class="social-icon logo-img" src="assets/icons/linkedin.svg" alt="" width="20" height="20" loading="lazy">
+              <span class="od-fill"><span class="social-name">LinkedIn</span><span class="social-handle od-truncate" title="in/kelvin-oliveira-code">in/kelvin-oliveira-code</span></span>
+              <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+            </a>
+            <a class="social-link" href="https://github.com/KelvinOliveiraCode" target="_blank" rel="noopener">
+              <img class="social-icon logo-img" src="assets/icons/github.svg" alt="" width="20" height="20" loading="lazy">
+              <span class="od-fill"><span class="social-name">GitHub</span><span class="social-handle od-truncate" title="github.com/KelvinOliveiraCode">github.com/KelvinOliveiraCode</span></span>
+              <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+            </a>
+            <a class="social-link" href="https://instagram.com/tessumax" target="_blank" rel="noopener">
+              <img class="social-icon logo-img" src="assets/icons/instagram.svg" alt="" width="20" height="20" loading="lazy">
+              <span class="od-fill"><span class="social-name">Instagram</span><span class="social-handle od-truncate" title="@tessumax">@tessumax</span></span>
+              <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+            </a>
+            <a class="social-link" href="https://tiktok.com/@tessumax" target="_blank" rel="noopener">
+              <img class="social-icon logo-img" src="assets/icons/tiktok.svg" alt="" width="20" height="20" loading="lazy">
+              <span class="od-fill"><span class="social-name">TikTok</span><span class="social-handle od-truncate" title="@tessumax">@tessumax</span></span>
+              <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+            </a>
+            <a class="social-link" href="https://x.com/Tessumax" target="_blank" rel="noopener">
+              <img class="social-icon logo-img" src="assets/icons/x.svg" alt="" width="20" height="20" loading="lazy">
+              <span class="od-fill"><span class="social-name">X</span><span class="social-handle od-truncate" title="@Tessumax">@Tessumax</span></span>
+              <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+            </a>
+            <a class="social-link" href="https://facebook.com/TessumaxStudio" target="_blank" rel="noopener">
+              <img class="social-icon logo-img" src="assets/icons/facebook.svg" alt="" width="20" height="20" loading="lazy">
+              <span class="od-fill"><span class="social-name">Facebook</span><span class="social-handle od-truncate" title="TessumaxStudio">TessumaxStudio</span></span>
+              <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+            </a>
+          </div>
+
+          <p class="contact-note">Este formulário não tem servidor: o botão do WhatsApp monta a mensagem com o seu brief e abre a conversa. Nada sai do seu navegador até você apertar enviar.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img class="footer-mark" src="assets/logo-tessumax.svg" alt="Tessumax" width="44" height="34">
+        <p class="footer-blurb">Empresa de tecnologia em Belém/PA. Sites, sistemas, apps, vídeos e marketing com código próprio, processo claro e entrega documentada.</p>
+        <a class="link-arrow" href="#contato">Enviar brief
+          <svg class="od-icon" style="--od-icon-size:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+
+      <nav class="footer-col" aria-label="Seções do site">
+        <p class="footer-title">Navegação</p>
+        <div class="footer-links">
+          <a class="footer-link" href="#frentes">Serviços</a>
+          <a class="footer-link" href="#processo">Processo</a>
+          <a class="footer-link" href="#produtos">Produtos</a>
+          <a class="footer-link" href="#exemplos">Exemplos</a>
+          <a class="footer-link" href="#stack">Stack</a>
+          <a class="footer-link" href="#sobre">Quem faz</a>
+          <a class="footer-link" href="#depoimentos">Depoimentos</a>
+        </div>
+      </nav>
+
+      <div class="footer-col">
+        <p class="footer-title">Redes</p>
+        <div class="footer-links">
+          <a class="footer-link" href="https://wa.me/5591986134599" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="footer-link" href="https://instagram.com/tessumax" target="_blank" rel="noopener">Instagram</a>
+          <a class="footer-link" href="https://tiktok.com/@tessumax" target="_blank" rel="noopener">TikTok</a>
+          <a class="footer-link" href="https://x.com/Tessumax" target="_blank" rel="noopener">X</a>
+          <a class="footer-link" href="https://facebook.com/TessumaxStudio" target="_blank" rel="noopener">Facebook</a>
+          <a class="footer-link" href="https://www.linkedin.com/in/kelvin-oliveira-code/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="footer-link" href="https://github.com/KelvinOliveiraCode" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-base">
+      <p>© <span data-year="">2026</span> Tessumax · Belém/PA</p>
+      <p>Feito por <a href="https://kelvinoliveiracode.github.io/portfolio/" target="_blank" rel="noopener">Kelvin Oliveira</a></p>
     </div>
   </div>
 </footer>
 
-<script>
-  // Preloader
-  const preloader = document.getElementById('preloader');
-  const barFill = document.getElementById('barFill');
-  document.body.style.overflow = 'hidden';
-  let progress = 0;
-  const barTick = setInterval(() => {
-    progress += Math.random() * 8 + 3;
-    if (progress >= 90) progress = 90;
-    barFill.style.width = Math.round(progress) + '%';
-  }, 100);
+<button class="to-top" id="toTop" type="button" aria-label="Voltar ao topo" aria-hidden="true">
+  <svg class="od-icon" style="--od-icon-size:18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"></path></svg>
+</button>
 
-  // Preload all assets before revealing the site
-  function preloadImages() {
-    const sources = [];
-    const seen = new Set();
-    document.querySelectorAll('img').forEach((img) => {
-      if (img.src && !seen.has(img.src)) { seen.add(img.src); sources.push(img.src); }
-    });
-    // hero background
-    const heroBg = document.querySelector('header.hero .bg');
-    if (heroBg) {
-      const bgImage = getComputedStyle(heroBg).backgroundImage;
-      const match = bgImage && bgImage.match(/url\(["']?([^"')]+)["']?\)/);
-      if (match && match[1] && !seen.has(match[1])) { seen.add(match[1]); sources.push(match[1]); }
-    }
-    const tasks = sources.map((src) => new Promise((resolve) => {
-      const img = new Image();
-      img.onload = img.onerror = () => resolve(src);
-      img.src = src;
-    }));
-    return Promise.all(tasks);
-  }
+<script src="assets/js/main.js" defer=""></script>
 
-  function waitForFonts() {
-    if (document.fonts && document.fonts.ready) {
-      return document.fonts.ready;
-    }
-    return Promise.resolve();
-  }
 
-  function waitForDomReady() {
-    if (document.readyState === 'complete') return Promise.resolve();
-    return new Promise((resolve) => {
-      if (document.readyState === 'loading') {
-        window.addEventListener('load', () => resolve(), { once: true });
-      } else {
-        // interactive
-        window.addEventListener('DOMContentLoaded', () => resolve(), { once: true });
-      }
-    });
-  }
-
-  function waitForPaint() {
-    return new Promise((resolve) => {
-      requestAnimationFrame(() => requestAnimationFrame(resolve));
-    });
-  }
-
-  Promise.all([preloadImages(), waitForFonts(), waitForDomReady()])
-    .then(() => waitForPaint())
-    .then(() => {
-      progress = 100;
-      barFill.style.width = '100%';
-      clearInterval(barTick);
-      setTimeout(() => {
-        preloader.classList.add('done');
-        document.body.style.overflow = '';
-      }, 400);
-    })
-    .catch(() => {
-      progress = 100;
-      barFill.style.width = '100%';
-      clearInterval(barTick);
-      preloader.classList.add('done');
-      document.body.style.overflow = '';
-    });
-
-  // Hamburger menu toggle (acessível)
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const firstMobileLink = mobileMenu ? mobileMenu.querySelector('a') : null;
-  if (hamburgerBtn && mobileMenu) {
-    hamburgerBtn.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('open');
-      hamburgerBtn.classList.toggle('open', open);
-      hamburgerBtn.setAttribute('aria-expanded', String(open));
-      if (open) {
-        mobileMenu.setAttribute('aria-hidden', 'false');
-        setTimeout(() => firstMobileLink?.focus(), 150);
-      } else {
-        mobileMenu.setAttribute('aria-hidden', 'true');
-        hamburgerBtn.focus();
-      }
-    });
-    mobileMenu.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        hamburgerBtn.classList.remove('open');
-        hamburgerBtn.setAttribute('aria-expanded', 'false');
-        mobileMenu.setAttribute('aria-hidden', 'true');
-        hamburgerBtn.focus();
-      });
-    });
-    // Fecha com Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        mobileMenu.classList.remove('open');
-        hamburgerBtn.classList.remove('open');
-        hamburgerBtn.setAttribute('aria-expanded', 'false');
-        mobileMenu.setAttribute('aria-hidden', 'true');
-        hamburgerBtn.focus();
-      }
-    });
-  }
-
-  // Fallback de seguranca
-  setTimeout(() => {
-    if (!preloader.classList.contains('done')) {
-      progress = 100;
-      barFill.style.width = '100%';
-      clearInterval(barTick);
-      preloader.classList.add('done');
-      document.body.style.overflow = '';
-    }
-  }, 8000);
-
-  // Nav visibility
-  const nav = document.getElementById('mainNav');
-  setTimeout(() => nav.classList.add('visible'), 100);
-
-  // Scroll reveal
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.reveal').forEach((el) => {
-      observer.observe(el);
-    });
-  } else {
-    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
-  }
-
-  // Smooth parallax no hero (leve)
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const heroBg = document.querySelector('header.hero .bg');
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      if (scrolled < window.innerHeight) {
-        heroBg.style.transform = `translateY(${scrolled * 0.3}px)`;
-      }
-    }, { passive: true });
-  }
-
-  // Carousel drag-to-scroll + botões
-  const track = document.getElementById('carouselTrack');
-  const prevBtn = document.getElementById('carouselPrev');
-  const nextBtn = document.getElementById('carouselNext');
-  if (track) {
-    let isDown = false;
-    let startX = 0;
-    let startScroll = 0;
-    let isDragging = false;
-
-    track.addEventListener('pointerdown', (e) => {
-      isDown = true;
-      isDragging = false;
-      startX = e.clientX;
-      startScroll = track.scrollLeft;
-      track.style.cursor = 'grabbing';
-      track.style.scrollBehavior = 'auto';
-    });
-
-    track.addEventListener('pointermove', (e) => {
-      if (!isDown) return;
-      const dx = e.clientX - startX;
-      if (Math.abs(dx) > 5) isDragging = true;
-      track.scrollLeft = startScroll - dx;
-    });
-
-    track.addEventListener('pointerup', () => {
-      isDown = false;
-      track.style.cursor = 'grab';
-      track.style.scrollBehavior = 'smooth';
-    });
-
-    track.addEventListener('pointerleave', () => {
-      isDown = false;
-      track.style.cursor = 'grab';
-    });
-
-    // Previne clique após drag
-    track.addEventListener('click', (e) => {
-      if (isDragging) {
-        e.preventDefault();
-        e.stopPropagation();
-        isDragging = false;
-      }
-    }, true);
-
-    const cardWidth = 280 + 12; // flex-basis + gap
-    prevBtn?.addEventListener('click', () => {
-      track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-    });
-    nextBtn?.addEventListener('click', () => {
-      track.scrollBy({ left: cardWidth, behavior: 'smooth' });
-    });
-
-    // Esconde scrollbar mas mantém funcionalidade
-    track.style.scrollbarWidth = 'none';
-    track.style.msOverflowStyle = 'none';
-    const style = document.createElement('style');
-    style.textContent = '#carouselTrack::-webkit-scrollbar { display: none; }';
-    document.head.appendChild(style);
-
-    // Pagination dots
-    const dotsContainer = document.getElementById('carouselDots');
-    const cards = track.querySelectorAll('a');
-    if (dotsContainer && cards.length) {
-      cards.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'carousel-dot';
-        dot.setAttribute('aria-label', `Ir para item ${i + 1}`);
-        dot.type = 'button';
-        dot.addEventListener('click', () => {
-          track.scrollTo({ left: cards[i].offsetLeft - track.offsetLeft, behavior: 'smooth' });
-        });
-        dotsContainer.appendChild(dot);
-      });
-      function updateDots() {
-        const scrollLeft = track.scrollLeft;
-        cards.forEach((card, i) => {
-          const isActive = Math.abs(card.offsetLeft - track.offsetLeft - scrollLeft) < 10;
-          dot.classList.toggle('active', isActive);
-        });
-      }
-      track.addEventListener('scroll', updateDots);
-      updateDots();
-    }
-  }
-</script>
-
-</body>
-</html>
+</body></html>

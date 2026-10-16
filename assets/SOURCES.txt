@@ -1,0 +1,91 @@
+=== FONTES ===
+assets/fonts/archivo-latin.woff2 | https://fonts.gstatic.com/s/archivo/v25/k3kQo8UDI-1M0wlSfdnoLg.woff2 | 90104
+assets/fonts/archivo-latin-ext.woff2 | https://fonts.gstatic.com/s/archivo/v25/k3kQo8UDI-1M0wlSfdfoLnnA.woff2 | 86240
+assets/fonts/jetbrains-mono-latin.woff2 | https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2 | 31432
+assets/fonts/jetbrains-mono-latin-ext.woff2 | https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2 | 11624
+
+=== LOGOS ===
+assets/logos/css.svg | https://cdn.simpleicons.org/css/white | 1494
+assets/logos/docker.svg | https://cdn.simpleicons.org/docker/white | 1780
+assets/logos/expo.svg | https://cdn.simpleicons.org/expo/white | 466
+assets/logos/git.svg | https://cdn.simpleicons.org/git/white | 441
+assets/logos/html5.svg | https://cdn.simpleicons.org/html5/white | 342
+assets/logos/java.svg | https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg | 1540
+assets/logos/javascript.svg | https://cdn.simpleicons.org/javascript/white | 989
+assets/logos/linux.svg | https://cdn.simpleicons.org/linux/white | 5478
+assets/logos/mysql.svg | https://cdn.simpleicons.org/mysql/white | 3640
+assets/logos/nodejs.svg | https://cdn.simpleicons.org/nodedotjs/white | 1623
+assets/logos/postgresql.svg | https://cdn.simpleicons.org/postgresql/white | 5220
+assets/logos/python.svg | https://cdn.simpleicons.org/python/white | 1533
+assets/logos/react.svg | https://cdn.simpleicons.org/react/white | 2941
+assets/logos/ruby.svg | https://cdn.simpleicons.org/ruby/white | 550
+assets/logos/rust.svg | https://cdn.simpleicons.org/rust/white | 4259
+assets/logos/springboot.svg | https://cdn.simpleicons.org/springboot/white | 1001
+assets/logos/tailwind.svg | https://cdn.simpleicons.org/tailwindcss/white | 617
+assets/logos/tauri.svg | https://cdn.simpleicons.org/tauri/white | 695
+assets/logos/typescript.svg | https://cdn.simpleicons.org/typescript/white | 1309
+assets/logos/vite.svg | https://cdn.simpleicons.org/vite/white | 462
+
+assets/logos/astro.svg | https://cdn.simpleicons.org/astro | 794
+assets/logos/cloudflare.svg | https://cdn.simpleicons.org/cloudflare | 1193
+assets/logos/ffmpeg.svg | https://cdn.simpleicons.org/ffmpeg | 434
+assets/logos/figma.svg | https://cdn.simpleicons.org/figma | 1108
+assets/logos/framer.svg | https://cdn.simpleicons.org/framer | 161
+assets/logos/gbp.svg | https://cdn.simpleicons.org/googlemaps | 1039
+assets/logos/gemini.svg | https://cdn.simpleicons.org/googlegemini | 416
+assets/logos/gsap.svg | https://cdn.simpleicons.org/greensock | 8736
+assets/logos/hyperframes.svg | https://hyperframes.dev/favicon-light.svg | 1066
+assets/logos/lottie.svg | https://cdn.simpleicons.org/lottiefiles | 618
+assets/logos/nextjs.svg | https://cdn.simpleicons.org/nextdotjs | 337
+assets/logos/npm.svg | https://cdn.simpleicons.org/npm | 332
+assets/logos/opencv.svg | https://cdn.simpleicons.org/opencv | 1325
+assets/logos/p5js.svg | https://cdn.simpleicons.org/p5dotjs | 2892
+assets/logos/playwright.svg | https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/playwright.svg | 1000
+assets/logos/puppeteer.svg | https://cdn.simpleicons.org/puppeteer | 8050
+assets/logos/remotion.svg | https://raw.githubusercontent.com/remotion-dev/remotion/main/packages/brand/public/logo/remotion/logo.svg | 3695
+assets/logos/searchconsole.svg | https://cdn.simpleicons.org/googlesearchconsole | 1083
+assets/logos/stripe.svg | https://cdn.simpleicons.org/stripe | 603
+assets/logos/supabase.svg | https://cdn.simpleicons.org/supabase | 318
+assets/logos/threejs.svg | https://cdn.simpleicons.org/threedotjs | 912
+assets/logos/whisper.svg | https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg | 1570
+# Monocromatização: aplicada no CSS (.logo-img), não no arquivo. Whisper usa a marca OpenAI (dona do modelo); Lottie usa a marca LottieFiles.
+# Sem marca oficial pública (renderizados como monograma no site, sem logo fabricado): Tesseract OCR (TS), DataForSEO (DF), OpenSEO (SEO).
+# Trocas de marca pedidas pelo cliente: Java saiu do simbolo OpenJDK para a marca Java (xicara, devicon java-original — marca Oracle, uso nominativo numa lista de tecnologias); Remotion saiu do logo antigo (verde, remotion.dev/img/logo.svg) para o pacote oficial de marca (packages/brand/public/logo/remotion/logo.svg); HyperFrames entrou com a marca oficial do site.
+
+=== IMAGENS DERIVADAS ===
+assets/og-image.png | 1200x630 | gerado de banner-tessumax.svg | rasterizado em Chrome headless; fundo do card casado com a cor amostrada da propria arte (#0a0a0b)
+assets/apple-touch-icon.png | 180x180 | gerado de logo-Tessumax.svg | mesmo metodo; fundo #fefefe amostrado da arte
+assets/logo-tessumax.svg | 408x311 | derivado de logo-Tessumax.svg | placa de fundo removida (subpath de 163 chars do path branco); arte mantida com fill-rule evenodd e viewBox reapertado na bbox medida da propria arte (139.01 133.23 391.55 294.87 + 8 de folga). Sem cor fixa de tema: o CSS (.brand-mark/.preloader-mark/.footer-mark) aplica branco no Tinta e preto no Papel, igual as demais logos.
+
+=== ÍCONES ===
+assets/icons/facebook.svg | https://cdn.simpleicons.org/facebook/white | 557
+assets/icons/github.svg | https://cdn.simpleicons.org/github/white | 837
+assets/icons/instagram.svg | https://cdn.simpleicons.org/instagram/white | 2116
+assets/icons/linkedin.svg | https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@latest/svgs/brands/linkedin.svg | 728
+assets/icons/tiktok.svg | https://cdn.simpleicons.org/tiktok/white | 722
+assets/icons/whatsapp.svg | https://cdn.simpleicons.org/whatsapp/white | 1231
+assets/icons/x.svg | https://cdn.simpleicons.org/x/white | 314
+
+=== CAPTURAS ===
+17 arquivos, todos 800x800 px. Os endereços terminam em .jpg mas o conteúdo servido é PNG (magic 0x8950 4E47);
+por isso foram salvos com a extensão real .png. Origem de cada um:
+https://kelvinoliveiracode.github.io/tessumax-landing/assets/screens/<nome>.jpg
+assets/screens/academia-fitness.png | 800x800 | 57264
+assets/screens/advogacia.png | 800x800 | 109993
+assets/screens/casamento-eventos.png | 800x800 | 142789
+assets/screens/clinica-medica.png | 800x800 | 116342
+assets/screens/construcao-civil.png | 800x800 | 62188
+assets/screens/cripto-web3.png | 800x800 | 90320
+assets/screens/cursos-ead.png | 800x800 | 111433
+assets/screens/energia-solar.png | 800x800 | 80375
+assets/screens/estetica-beleza.png | 800x800 | 78596
+assets/screens/financas-investimentos.png | 800x800 | 307314
+assets/screens/imobiliaria.png | 800x800 | 48331
+assets/screens/marketing-digital.png | 800x800 | 82382
+assets/screens/moda-ecommerce.png | 800x800 | 52974
+assets/screens/odontologia.png | 800x800 | 98122
+assets/screens/restaurante-delivery.png | 800x800 | 130381
+assets/screens/tech-saas.png | 800x800 | 114119
+assets/screens/viagens-turismo.png | 800x800 | 105003
+
+Logos de marca: Simple Icons (CC0), marcas pertencem aos respectivos titulares. Capturas: acervo próprio Tessumax/KelvinOliveiraCode.
