@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Tessumax - studio de sites, sistemas e apps do brief à entrega. Garimpo e KODAROS no ar. Código aberto, contato real.">
 <title>Tessumax Studio - sites, sistemas e apps do brief à entrega</title>
+<link rel="canonical" href="https://kelvinoliveiracode.github.io/tessumax-landing/">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Kelvin Oliveira - Tessumax Studio">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kelvinoliveiracode.github.io/tessumax-landing/">
+<meta property="og:title" content="Tessumax Studio - sites, sistemas e apps do brief à entrega">
+<meta property="og:description" content="Tessumax - studio de sites, sistemas e apps do brief à entrega. Garimpo e KODAROS no ar. Código aberto, contato real.">
+<meta property="og:image" content="https://kelvinoliveiracode.github.io/tessumax-landing/assets/banner.png">
+<meta property="og:image:width" content="1789">
+<meta property="og:image:height" content="671">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tessumax Studio - sites, sistemas e apps do brief à entrega">
+<meta name="twitter:description" content="Tessumax - studio de sites, sistemas e apps do brief à entrega. Garimpo e KODAROS no ar. Código aberto, contato real.">
+<meta name="twitter:image" content="https://kelvinoliveiracode.github.io/tessumax-landing/assets/banner.png">
 <link rel="icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +32,7 @@
     --panel: #1a1a1f;
     --line: rgba(245,245,242,0.10);
     --text: #f5f5f2;
-    --text-secondary: #b9b9b6;
+    --text-secondary: #d0d0d0;
     --muted: #7a7a80;
     --ink: #111113;
     --paper: #f5f5f2;
@@ -41,6 +55,19 @@
   html { scrollbar-width: thin; scrollbar-color: var(--line) var(--bg-alt); }
   .carousel-track::-webkit-scrollbar, .carousel-track::-webkit-scrollbar-track, .carousel-track::-webkit-scrollbar-thumb { display: none; width: 0; height: 0; }
   .carousel-track { -ms-overflow-style: none; scrollbar-width: none !important; }
+
+  /* CARROSEL DOTS */
+  .carousel-dots { display: none; gap: .5rem; justify-content: center; margin-top: 1rem; }
+  .carousel-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--line);
+    cursor: pointer; transition: background .2s, transform .2s; border: none; padding: 0;
+  }
+  .carousel-dot.active { background: var(--accent); transform: scale(1.4); }
+  .carousel-dot:hover { background: var(--text); }
+
+  @media (max-width: 900px) {
+    .carousel-dots { display: flex; }
+  }
 
   html { scroll-behavior: smooth; }
 
@@ -67,6 +94,24 @@
   h1,h2,h3,h4 { font-family: 'Space Grotesk', system-ui, sans-serif; letter-spacing: -0.025em; line-height: 1; }
 
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  /* SKIP LINK */
+  .skip-link {
+    position: absolute;
+    top: -10000px;
+    left: 0;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 1rem;
+    z-index: 10000;
+    text-decoration: underline;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+  }
+  .skip-link:focus {
+    top: var(--col);
+    left: var(--col);
+  }
 
   /* PRELOADER */
   .preloader {
@@ -154,7 +199,7 @@
 
   /* HERO */
   header.hero {
-    width: 100%; min-height: 92vh;
+    width: 100%; min-height: 65vh;
     display: flex; align-items: flex-end;
     position: relative; overflow: hidden;
     background: var(--bg);
@@ -400,7 +445,7 @@
     .hero-actions { flex-direction: column; gap: .75rem; }
     .hero-actions .btn-primary, .hero-actions .btn-ghost { text-align: center; width: 100%; justify-content: center; }
     header.hero .foot { display: none; }
-    header.hero { min-height: 75vh; }
+    header.hero { min-height: 60vh; }
     header.hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
     .marquee { padding: .6rem 0; }
     .marquee-track { font-size: clamp(.75rem, 2.5vw, 1rem); gap: 1.25rem; }
@@ -432,6 +477,7 @@
 </style>
 </head>
 <body>
+  <a class="skip-link" href="#contato">Pular para contato</a>
 
 <!-- PRELOADER -->
 <div class="preloader" id="preloader">
@@ -455,7 +501,7 @@
       <a href="#contato">Contato</a>
       <a class="cta" href="https://www.linkedin.com/in/kelvin-oliveira-code/">LinkedIn</a>
     </div>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -587,21 +633,23 @@
           <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/clinica-medica/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/clinica-medica.jpg" alt="Exemplo de site para clínica médica" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Clínica Médica</div></div></a>
           <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/academia-fitness/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/academia-fitness.jpg" alt="Exemplo de site para academia" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Academia</div></div></a>
           <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/advocacia/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/advogacia.jpg" alt="Exemplo de site para advocacia" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Advocacia</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/moda-ecommerce/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/moda-ecommerce.jpg" alt="Exemplo de site para moda" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Moda</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/cursos-ead/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/cursos-ead.jpg" alt="Exemplo de site para cursos" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Cursos</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/imobiliaria/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/imobiliaria.jpg" alt="Exemplo de site para imobiliária" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Imobiliária</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/estetica-beleza/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/estetica-beleza.jpg" alt="Exemplo de site para estética" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Estética</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/tech-saas/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/tech-saas.jpg" alt="Exemplo de site para SaaS" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">SaaS</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/restaurante-delivery/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/restaurante-delivery.jpg" alt="Exemplo de site para restaurante" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Restaurante</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/financas-investimentos/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/financas-investimentos.jpg" alt="Exemplo de site para finanças" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Finanças</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/casamento-eventos/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/casamento-eventos.jpg" alt="Exemplo de site para casamento" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Casamento</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/odontologia/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/odontologia.jpg" alt="Exemplo de site para odontologia" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Odontologia</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/marketing-digital/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/marketing-digital.jpg" alt="Exemplo de site para marketing digital" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Marketing</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/energia-solar/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/energia-solar.jpg" alt="Exemplo de site para energia solar" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Energia Solar</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/construcao-civil/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/construcao-civil.jpg" alt="Exemplo de site para construção civil" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Construção</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/viagens-turismo/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/viagens-turismo.jpg" alt="Exemplo de site para viagens" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Viagens</div></div></a>
-          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/cripto-web3/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/cripto-web3.jpg" alt="Exemplo de site para cripto" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Cripto</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/moda-ecommerce/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/moda-ecommerce.jpg" alt="Exemplo de site para moda" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Moda</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/cursos-ead/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/cursos-ead.jpg" alt="Exemplo de site para cursos" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Cursos</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/imobiliaria/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/imobiliaria.jpg" alt="Exemplo de site para imobiliária" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Imobiliária</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/estetica-beleza/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/estetica-beleza.jpg" alt="Exemplo de site para estética" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Estética</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/tech-saas/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/tech-saas.jpg" alt="Exemplo de site para SaaS" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">SaaS</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/restaurante-delivery/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/restaurante-delivery.jpg" alt="Exemplo de site para restaurante" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Restaurante</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/financas-investimentos/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/financas-investimentos.jpg" alt="Exemplo de site para finanças" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Finanças</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/casamento-eventos/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/casamento-eventos.jpg" alt="Exemplo de site para casamento" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Casamento</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/odontologia/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/odontologia.jpg" alt="Exemplo de site para odontologia" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Odontologia</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/marketing-digital/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/marketing-digital.jpg" alt="Exemplo de site para marketing digital" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Marketing</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/energia-solar/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/energia-solar.jpg" alt="Exemplo de site para energia solar" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Energia Solar</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/construcao-civil/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/construcao-civil.jpg" alt="Exemplo de site para construção civil" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Construção</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/viagens-turismo/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/viagens-turismo.jpg" alt="Exemplo de site para viagens" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Viagens</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/cripto-web3/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/cripto-web3.jpg" alt="Exemplo de site para cripto" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Cripto</div></div></a>
         </div>
+        <nav class="carousel-dots" id="carouselDots" style="display: flex; gap: .5rem; justify-content: center; margin-top: 1rem; align-items: center;">
+        </nav>
         <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Próximo" style="position: absolute; right: -1rem; top: 50%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-alt); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background .2s;">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -619,83 +667,83 @@
     </div>
     <div class="grid-stack">
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/python" alt="Python" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/python" alt="Python" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Python</div><div class="tag">Backend, IA, Dados</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/javascript" alt="JavaScript" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/javascript" alt="JavaScript" width="32" height="32" loading="lazy"></div>
         <div><div class="name">JavaScript</div><div class="tag">Frontend, Backend</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/typescript" alt="TypeScript" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/typescript" alt="TypeScript" width="32" height="32" loading="lazy"></div>
         <div><div class="name">TypeScript</div><div class="tag">Frontend, Backend</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Java</div><div class="tag">Enterprise, APIs</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/rust" alt="Rust" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/rust" alt="Rust" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Rust</div><div class="tag">Sistema, Tauri</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/react" alt="React" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/react" alt="React" width="32" height="32" loading="lazy"></div>
         <div><div class="name">React</div><div class="tag">UI, Componentes</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/nodedotjs" alt="Node.js" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/nodedotjs" alt="Node.js" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Node.js</div><div class="tag">Runtime, APIs</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/docker" alt="Docker" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/docker" alt="Docker" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Docker</div><div class="tag">Containers</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL" width="32" height="32" loading="lazy"></div>
         <div><div class="name">PostgreSQL</div><div class="tag">Banco de Dados</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/springboot" alt="Spring Boot" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/springboot" alt="Spring Boot" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Spring Boot</div><div class="tag">Java, APIs REST</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Tailwind</div><div class="tag">CSS, Utility-first</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/html5" alt="HTML5" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/html5" alt="HTML5" width="32" height="32" loading="lazy"></div>
         <div><div class="name">HTML5</div><div class="tag">Semântica, SEO</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/css" alt="CSS" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/css" alt="CSS" width="32" height="32" loading="lazy"></div>
         <div><div class="name">CSS</div><div class="tag">Layout, Animações</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/git" alt="Git" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/git" alt="Git" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Git</div><div class="tag">Versionamento</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/tauri" alt="Tauri" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/tauri" alt="Tauri" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Tauri</div><div class="tag">Desktop, Rust</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/vite" alt="Vite" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/vite" alt="Vite" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Vite</div><div class="tag">Build Tool</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/linux" alt="Linux" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/linux" alt="Linux" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Linux</div><div class="tag">Servidores, DevOps</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/mysql" alt="MySQL" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/mysql" alt="MySQL" width="32" height="32" loading="lazy"></div>
         <div><div class="name">MySQL</div><div class="tag">Banco de Dados</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/expo" alt="Expo" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/expo" alt="Expo" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Expo</div><div class="tag">React Native</div></div>
       </div>
       <div class="tech reveal">
-        <div class="icon"><img src="https://cdn.simpleicons.org/ruby" alt="Ruby" width="32" height="32" loading="eager"></div>
+        <div class="icon"><img src="https://cdn.simpleicons.org/ruby" alt="Ruby" width="32" height="32" loading="lazy"></div>
         <div><div class="name">Ruby</div><div class="tag">Linguagem, Scripts</div></div>
       </div>
 
@@ -835,21 +883,41 @@
       document.body.style.overflow = '';
     });
 
-  // Hamburger menu toggle
+  // Hamburger menu toggle (acessível)
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mobileMenu = document.getElementById('mobileMenu');
+  const firstMobileLink = mobileMenu ? mobileMenu.querySelector('a') : null;
   if (hamburgerBtn && mobileMenu) {
     hamburgerBtn.addEventListener('click', () => {
       const open = mobileMenu.classList.toggle('open');
       hamburgerBtn.classList.toggle('open', open);
       hamburgerBtn.setAttribute('aria-expanded', String(open));
+      if (open) {
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        setTimeout(() => firstMobileLink?.focus(), 150);
+      } else {
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        hamburgerBtn.focus();
+      }
     });
     mobileMenu.querySelectorAll('a').forEach((a) => {
       a.addEventListener('click', () => {
         mobileMenu.classList.remove('open');
         hamburgerBtn.classList.remove('open');
         hamburgerBtn.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        hamburgerBtn.focus();
       });
+    });
+    // Fecha com Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        hamburgerBtn.focus();
+      }
     });
   }
 
@@ -956,6 +1024,31 @@
     const style = document.createElement('style');
     style.textContent = '#carouselTrack::-webkit-scrollbar { display: none; }';
     document.head.appendChild(style);
+
+    // Pagination dots
+    const dotsContainer = document.getElementById('carouselDots');
+    const cards = track.querySelectorAll('a');
+    if (dotsContainer && cards.length) {
+      cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot';
+        dot.setAttribute('aria-label', `Ir para item ${i + 1}`);
+        dot.type = 'button';
+        dot.addEventListener('click', () => {
+          track.scrollTo({ left: cards[i].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+        });
+        dotsContainer.appendChild(dot);
+      });
+      function updateDots() {
+        const scrollLeft = track.scrollLeft;
+        cards.forEach((card, i) => {
+          const isActive = Math.abs(card.offsetLeft - track.offsetLeft - scrollLeft) < 10;
+          dot.classList.toggle('active', isActive);
+        });
+      }
+      track.addEventListener('scroll', updateDots);
+      updateDots();
+    }
   }
 </script>
 
