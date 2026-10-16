@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tessumax - studio de sites, sistemas e apps do brief à entrega. Garimpo e KODAROS no ar. Código aberto, contato real.">
+<title>Tessumax Studio - sites, sistemas e apps do brief à entrega</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" crossorigin>
+<link rel="preload" href="https://fonts.gstatic.com/s/spacegrotesk/v22/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7o.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/banner.svg" as="image">
+<style>
+  :root {
+    --bg: #0e0e11;
+    --bg-alt: #141418;
+    --panel: #1a1a1f;
+    --line: rgba(245,245,242,0.10);
+    --text: #f5f5f2;
+    --text-secondary: #b9b9b6;
+    --muted: #7a7a80;
+    --ink: #111113;
+    --paper: #f5f5f2;
+    --paper-2: #eaeae5;
+    --accent: #ff6a3d;
+    --accent-2: #f5f5f2;
+    --radius: 22px;
+    --radius-sm: 12px;
+    --col: clamp(1rem, 5vw, 4rem);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { color-scheme: dark; }
+  /* CUSTOM SCROLLBAR */
+  *::-webkit-scrollbar { width: 10px; height: 10px; }
+  *::-webkit-scrollbar-track { background: var(--bg-alt); }
+  *::-webkit-scrollbar-thumb { background: var(--line); border-radius: 999px; border: 2px solid var(--bg-alt); }
+  *::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  *::-webkit-scrollbar-corner { background: var(--bg-alt); }
+  html { scrollbar-width: thin; scrollbar-color: var(--line) var(--bg-alt); }
+  .carousel-track::-webkit-scrollbar, .carousel-track::-webkit-scrollbar-track, .carousel-track::-webkit-scrollbar-thumb { display: none; width: 0; height: 0; }
+  .carousel-track { -ms-overflow-style: none; scrollbar-width: none !important; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01","cv05";
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  html {
+    overflow-x: clip;
+    overflow-x: hidden;
+    max-width: 100%;
+    color-scheme: dark;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; height: auto; display: block; }
+
+  h1,h2,h3,h4 { font-family: 'Space Grotesk', system-ui, sans-serif; letter-spacing: -0.025em; line-height: 1; }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  /* PRELOADER */
+  .preloader {
+    position: fixed; inset: 0; z-index: 100;
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1.5rem;
+    transition: opacity .5s ease, visibility .5s ease;
+  }
+  .preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+  .preloader .logo-wrap {
+    width: 64px; height: 64px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  .preloader .logo-wrap img { width: 100%; height: 100%; object-fit: contain; filter: invert(1); }
+  .preloader .bar {
+    width: 120px; height: 2px; background: var(--line);
+    border-radius: 2px; overflow: hidden;
+  }
+  .preloader .bar-fill {
+    height: 100%; width: 0%; background: var(--accent);
+    transition: width .3s ease;
+  }
+  .preloader .label { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .5; } }
+
+  /* WRAPPERS */
+  .shell {
+    width: 100%;
+    padding-left: var(--col);
+    padding-right: var(--col);
+  }
+
+  .kicker {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* NAV */
+  nav.top {
+    position: sticky; top: 0; z-index: 20;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(14,14,17,0.7);
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-100%);
+    transition: transform .4s ease;
+  }
+  nav.top.visible { transform: translateY(0); }
+  nav.top .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem var(--col);
+    gap: 1rem;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700;
+    font-size: 1.25rem; letter-spacing: -0.02em;
+  }
+  .brand img { width: 34px; height: 34px; object-fit: contain; filter: invert(1); mix-blend-mode: screen; }
+  .brand span { color: var(--text); }
+  .brand em { color: var(--muted); font-style: normal; }
+
+  .navlinks {
+    display: flex; gap: 1.25rem; align-items: center;
+  }
+  .hamburger {
+    display: none;
+  }
+  .mobile-menu {
+    display: none;
+  }
+  .navlinks a { font-size: .9rem; color: var(--text-secondary); transition: color .2s; }
+  .navlinks a:hover { color: var(--text); }
+  .navlinks .cta {
+    background: var(--paper); color: var(--ink);
+    padding: .5rem 1.1rem; border-radius: 999px; font-weight: 600; font-size: .9rem;
+    transition: background .2s, color .2s;
+  }
+  .navlinks .cta:hover { background: var(--accent); color: #fff; }
+
+  /* HERO */
+  header.hero {
+    width: 100%; min-height: 92vh;
+    display: flex; align-items: flex-end;
+    position: relative; overflow: hidden;
+    background: var(--bg);
+  }
+  header.hero .bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('assets/banner.svg'); background-size: cover; background-position: center;
+    opacity: .18;
+  }
+  header.hero .grid {
+    position: absolute; inset: 0; z-index: 1;
+    background: radial-gradient(ellipse at 50% 120%, rgba(255,106,61,0.04), transparent 60%);
+    pointer-events: none;
+  }
+  header.hero .content {
+    position: relative; z-index: 2; width: 100%;
+    padding: 0 var(--col) clamp(3rem, 8vh, 7rem);
+  }
+  header.hero h1 {
+    font-size: clamp(2.8rem, 7vw, 8rem);
+    font-weight: 700;
+    max-width: 14ch;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.035em;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: heroIn .8s ease forwards .2s;
+  }
+  header.hero .lead {
+    font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+    color: var(--text-secondary);
+    max-width: 42ch;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroIn .8s ease forwards .4s;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroIn .8s ease forwards .6s;
+  }
+  @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: var(--paper); color: var(--ink);
+    padding: 1rem 1.6rem; border-radius: 999px;
+    font-weight: 600; font-size: 1rem;
+    transition: transform .2s ease, background .2s ease;
+    border: none;
+  }
+  .btn-primary:hover { transform: translateY(-2px); background: var(--accent); color: #fff; }
+  .btn-ghost {
+    color: var(--text); font-size: 1rem; font-weight: 500;
+    padding: 1rem 1.4rem; border: 1px solid var(--line); border-radius: 999px;
+    transition: border-color .2s ease, color .2s, background .2s;
+  }
+  .btn-ghost:hover { border-color: var(--text); background: rgba(245,245,242,.05); }
+
+  header.hero .foot {
+    position: absolute; right: var(--col); bottom: clamp(1.5rem, 4vh, 4rem); z-index: 2;
+    text-align: right; max-width: 24ch;
+    opacity: 0;
+    animation: heroIn .8s ease forwards .8s;
+  }
+  header.hero .foot span { display: block; color: var(--muted); font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: .25rem; }
+  header.hero .foot strong { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.05rem; }
+
+  /* MARQUEE */
+  .marquee {
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: .8rem 0; overflow: hidden; background: var(--bg-alt);
+    white-space: nowrap; width: 100%; max-width: 100%;
+    contain: content; position: relative;
+  }
+  .marquee-track {
+    display: inline-flex; align-items: center; gap: 2rem;
+    animation: marquee 40s linear infinite;
+    font-family: 'Space Grotesk', system-ui, sans-serif; font-size: clamp(.9rem, 1.5vw, 1.4rem); font-weight: 500;
+    color: var(--text-secondary); max-width: none; will-change: transform;
+  }
+  .marquee-track span { opacity: .85; }
+  .marquee-track .dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--muted); flex-shrink: 0;
+  }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+  /* WHAT */
+  section.what { padding: clamp(5rem, 10vh, 9rem) 0; background: var(--bg); width: 100%; }
+  section.what h2 {
+    font-size: clamp(2.2rem, 4.5vw, 5rem); font-weight: 700;
+    max-width: 16ch; margin-bottom: 1.25rem;
+  }
+  section.what > .shell > p { font-size: clamp(1.05rem, 1.4vw, 1.25rem); color: var(--text-secondary); max-width: 58ch; }
+  section.what .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(2rem, 3vw, 4rem); margin-top: 5rem; }
+  section.what .cols article { padding: 0; border: none; }
+  section.what .cols .num { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--accent); margin-bottom: .75rem; }
+  section.what .cols h3 { font-size: 1.5rem; margin-bottom: .6rem; }
+  section.what .cols p { font-size: 1rem; color: var(--text-secondary); }
+
+  /* PROCESS */
+  section.process { background: var(--bg-alt); width: 100%; padding: clamp(5rem, 10vh, 9rem) 0; }
+  section.process .head { margin-bottom: 3rem; }
+  section.process h2 { font-size: clamp(2.2rem, 4.5vw, 4.5rem); max-width: 18ch; }
+  section.process .steps {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(.8rem, 1.5vw, 1.25rem);
+    margin-top: 2.5rem;
+  }
+  .step {
+    background: var(--bg); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 2rem 1.5rem;
+    min-height: 200px; display: flex; flex-direction: column; justify-content: space-between;
+    transition: border-color .25s ease, transform .25s ease;
+  }
+  .step:hover { border-color: rgba(245,245,242,.2); transform: translateY(-4px); }
+  .step .num { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700; font-size: 1rem; color: var(--accent); margin-bottom: 1rem; }
+  .step h3 { font-size: 1.3rem; margin-bottom: .5rem; }
+  .step p { font-size: .95rem; color: var(--text-secondary); }
+
+  /* PRODUCTS */
+  section.products { background: var(--bg); width: 100%; padding: clamp(5rem, 10vh, 9rem) 0; }
+  section.products h2 { font-size: clamp(2.2rem, 4.5vw, 4.5rem); max-width: 18ch; margin-bottom: 1rem; }
+  section.products .intro { color: var(--text-secondary); max-width: 52ch; margin-bottom: 3rem; font-size: 1.1rem; }
+  section.products .grid-prod {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(.8rem, 1.5vw, 1.5rem);
+  }
+  .prod {
+    grid-column: span 6;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.5rem 1.75rem;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: border-color .25s ease, transform .25s ease;
+    min-height: 280px;
+  }
+  .prod:hover { border-color: rgba(245,245,242,.28); transform: translateY(-4px); }
+  .prod .top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.25rem;
+  }
+  .prod .lang {
+    font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); border: 1px solid var(--line); padding: .3rem .65rem; border-radius: 999px;
+  }
+  .prod h3 { font-size: 1.5rem; margin-bottom: .5rem; }
+  .prod p { color: var(--text-secondary); font-size: 1rem; line-height: 1.55; }
+  .prod .links { margin-top: 1.5rem; display: flex; gap: 1rem; font-size: .9rem; }
+  .prod .links a { color: var(--text); border-bottom: 1px solid var(--line); padding-bottom: 1px; transition: border-color .2s, color .2s; }
+  .prod .links a:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* STACK */
+  section.stack { background: var(--paper); color: var(--ink); width: 100%; padding: clamp(5rem, 10vh, 9rem) 0; }
+  section.stack .head { margin-bottom: 3rem; }
+  section.stack h2 { font-size: clamp(2.2rem, 4.5vw, 4.5rem); color: var(--ink); max-width: 18ch; }
+  section.stack .grid-stack {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(.8rem, 1.5vw, 1.25rem);
+    margin-top: 2.5rem;
+  }
+  .tech {
+    background: var(--ink); color: var(--paper); padding: 1.5rem 1.25rem;
+    border-radius: var(--radius); min-height: 120px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .tech:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .tech .icon img { filter: brightness(0) invert(1); opacity: .9; transition: opacity .2s, transform .25s ease; }
+  .tech:hover .icon img { opacity: 1; transform: scale(1.1); }
+  .tech .icon { width: 32px; height: 32px; margin-bottom: 1rem; }
+  .tech .icon svg, .tech .icon img { width: 100%; height: 100%; }
+  .tech .name { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600; font-size: .95rem; }
+  .tech .tag { font-size: .7rem; color: #8a8a90; margin-top: .2rem; }
+
+  /* ABOUT */
+  section.about { background: var(--bg-alt); width: 100%; padding: clamp(5rem, 10vh, 8rem) 0; }
+  section.about h2 { font-size: clamp(2rem, 4vw, 4rem); max-width: 20ch; margin-bottom: 1.5rem; }
+  section.about p { color: var(--text-secondary); font-size: 1.1rem; max-width: 54ch; margin-bottom: 1.2rem; }
+
+  /* CONTACT */
+  section.contact { background: var(--paper); color: var(--ink); width: 100%; padding: clamp(5rem, 10vh, 9rem) 0; }
+  section.contact h2 { font-size: clamp(2.2rem, 4.5vw, 5rem); color: var(--ink); max-width: 16ch; margin-bottom: 1.5rem; }
+  section.contact .lead { font-size: 1.15rem; color: #33333a; max-width: 52ch; margin-bottom: 3rem; }
+  section.contact .actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  section.contact .btn-dark {
+    background: var(--ink); color: var(--paper); padding: 1rem 1.6rem; border-radius: 999px;
+    font-weight: 600; transition: transform .2s, background .2s;
+  }
+  section.contact .btn-dark:hover { transform: translateY(-2px); background: var(--accent); color: #fff; }
+  section.contact .btn-outline {
+    border: 1px solid var(--ink); color: var(--ink); padding: 1rem 1.6rem; border-radius: 999px; font-weight: 600;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  section.contact .btn-outline:hover { background: var(--ink); color: var(--paper); }
+  section.contact .info { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; padding-top: 3rem; border-top: 1px solid #d6d6d0; }
+  section.contact .info div strong { display:block; font-family:'Space Grotesk',system-ui,sans-serif; font-size: .85rem; text-transform: uppercase; margin-bottom: .4rem; color: var(--muted); }
+  section.contact .info div a, section.contact .info div span { color: var(--ink); font-weight: 500; }
+
+  /* FOOTER */
+  footer.site { background: var(--bg); color: var(--text-secondary); padding: 4rem var(--col) 2rem; border-top: 1px solid var(--line); }
+  footer.site .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  footer.site h3 { font-family:'Space Grotesk',system-ui,sans-serif; color: var(--text); font-size: 1.6rem; margin-bottom: 1rem; }
+  footer.site p { font-size: .95rem; line-height: 1.6; max-width: 40ch; }
+  footer.site h4 { font-family:'Space Grotesk',system-ui,sans-serif; color: var(--text); font-size: 1rem; margin-bottom: 1rem; }
+  footer.site ul { list-style: none; padding: 0; margin: 0; }
+  footer.site ul li { margin-bottom: .5rem; }
+  footer.site ul a { font-size: .9rem; color: var(--text-secondary); transition: color .2s; }
+  footer.site ul a:hover { color: var(--accent); }
+  footer.site .footer-copy { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+  footer.site .logo { width: 22px; height: 22px; filter: invert(1); }
+  footer.site small { color: var(--muted); font-size: .75rem; }
+  footer.site .credit a { font-size: .78rem; color: var(--muted); border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
+  footer.site .credit a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .navlinks { display: none; }
+    .hamburger { display: flex; }
+    section.what .cols { grid-template-columns: 1fr; gap: 1.5rem; }
+    section.process .steps { grid-template-columns: 1fr; }
+    section.products .grid-prod { grid-template-columns: 1fr; }
+    .prod { grid-column: span 1; min-height: 220px; }
+    section.stack .grid-stack { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+    section.about .wrap { grid-template-columns: 1fr; gap: 2rem; }
+    section.contact .reveal[style*="repeat(2"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
+    footer.site .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-actions { flex-direction: column; gap: .75rem; }
+    .hero-actions .btn-primary, .hero-actions .btn-ghost { text-align: center; width: 100%; justify-content: center; }
+    header.hero .foot { display: none; }
+    header.hero { min-height: 75vh; }
+    header.hero h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+    .marquee { padding: .6rem 0; }
+    .marquee-track { font-size: clamp(.75rem, 2.5vw, 1rem); gap: 1.25rem; }
+    .carousel-btn { display: none !important; }
+    .carousel-track > a { flex: 0 0 240px !important; }
+    section.contact .actions { flex-direction: column; align-items: stretch; }
+    section.contact .actions a { text-align: center; width: 100%; }
+    section.contact .info { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    section.stack .grid-stack { grid-template-columns: 1fr 1fr; gap: .6rem; }
+    .tech { padding: 1rem .75rem; min-height: 100px; }
+    .tech .icon { width: 24px; height: 24px; margin-bottom: .6rem; }
+    .tech .name { font-size: .8rem; }
+    section.contact .info { grid-template-columns: 1fr; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .btn-primary, .hero-actions .btn-ghost { text-align: center; }
+  }
+  @media (max-width: 380px) {
+    section.stack .grid-stack { grid-template-columns: 1fr; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    header.hero h1, header.hero .lead, .hero-actions, header.hero .foot { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div class="preloader" id="preloader">
+  <div class="logo-wrap">
+    <img src="assets/logo.svg" alt="Tessumax">
+  </div>
+  <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+  <span class="label">Carregando</span>
+</div>
+
+<nav class="top" id="mainNav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="Tessumax Studio">
+      <span>Tessumax<em>·studio</em></span>
+    </div>
+    <div class="navlinks">
+      <a href="#servicos">Serviços</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#stack">Stack</a>
+      <a href="#contato">Contato</a>
+      <a class="cta" href="https://www.linkedin.com/in/kelvin-oliveira-code/">LinkedIn</a>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#servicos">Serviços</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#stack">Stack</a>
+    <a href="#exemplos">Exemplos</a>
+    <a href="#contato">Contato</a>
+    <a class="cta" href="https://www.linkedin.com/in/kelvin-oliveira-code/">LinkedIn</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bg"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <span class="kicker">Studio digital · Belém, BR</span>
+    <h1>Do brief ao lançamento.</h1>
+    <p class="lead">Sites, sistemas e apps com processo claro, código próprio e resultado real. Um único parceiro do desenho à release.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#produtos">Ver produtos</a>
+      <a class="btn-ghost" href="#contato">Enviar brief</a>
+    </div>
+  </div>
+  <div class="foot">
+    <span>Disponível</span>
+    <strong>Novos projetos em 2026</strong>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>SITES PÚBLICOS</span><span class="dot"></span><span>APPS MOBILE</span><span class="dot"></span><span>DASHBOARDS</span><span class="dot"></span><span>API REST</span><span class="dot"></span><span>TOOLS INTERNAS</span><span class="dot"></span><span>PWA OFFLINE</span><span class="dot"></span>
+    <span>SITES PÚBLICOS</span><span class="dot"></span><span>APPS MOBILE</span><span class="dot"></span><span>DASHBOARDS</span><span class="dot"></span><span>API REST</span><span class="dot"></span><span>TOOLS INTERNAS</span><span class="dot"></span><span>PWA OFFLINE</span><span class="dot"></span>
+  </div>
+</div>
+
+<section class="what" id="servicos">
+  <div class="shell">
+    <h2 class="reveal">Três frentes de entrega.</h2>
+    <p class="reveal">Tessumax pensa em manutenção desde o dia 1. O mesmo parceiro do desenho à release.</p>
+    <div class="cols">
+      <article class="reveal">
+        <h3>Sites que convencem</h3>
+        <p>Landing pages, portfólios e páginas de negócio com velocidade alta e medida de propósito. SEO básico, métricas e UTMs desde o dia 1.</p>
+      </article>
+      <article class="reveal">
+        <h3>Sistemas sob medida</h3>
+        <p>APIs REST, painéis, dashboards, ferramentas internas. Java, TypeScript, Python. Código entregue em repositório com histórico e documentação.</p>
+      </article>
+      <article class="reveal">
+        <h3>Apps para todos os lados</h3>
+        <p>PWA offline-first e apps móveis (Expo/React Native) quando for o caso. Fluxos que você pode testar antes de pagar a última parcela.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="shell">
+    <div class="head">
+      <span class="kicker" style="color:#7a7a80">Como funciona</span>
+      <h2 class="reveal">Processo claro, sem surpresa.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div>
+          <h3>Escopo</h3>
+          <p>Conversa inicial para entender o problema, prazo e entregáveis. Orçamento honesto antes de começar.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div>
+          <h3>Construção</h3>
+          <p>Desenvolvimento em ciclos curtos com atualizações regulares. Você vê o produto crescendo, não fica no escuro.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div>
+          <h3>Entrega</h3>
+          <p>Código em repositório, documentação mínima e suporte pós-lançamento. Outro dev consegue continuar sem perguntar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="products" id="produtos">
+  <div class="shell">
+    <h2 class="reveal">Produtos no ar.</h2>
+    <p class="intro reveal">Dois produtos publicados e acessíveis hoje. Código aberto, deploy real, resultado verificável.</p>
+    <div class="grid-prod">
+      <article class="prod reveal">
+        <div>
+          <div class="top"><span class="lang">Curadoria</span></div>
+          <h3>Garimpo</h3>
+          <p>Curadoria de 131 ofertas Shopee com filtros, wishlist e SEO. 100% client-side, sem backend, sem dependência.</p>
+          <div class="links">
+            <a href="https://kelvinoliveiracode.github.io/garimpo/" target="_blank" rel="noopener">Abrir Garimpo</a>
+            <a href="https://github.com/KelvinOliveiraCode/garimpo" target="_blank" rel="noopener">Repositório</a>
+          </div>
+        </div>
+      </article>
+      <article class="prod reveal">
+        <div>
+          <div class="top"><span class="lang">Plataforma</span></div>
+          <h3>KODAROS</h3>
+          <p>Plataforma com 8 e-books, diagnóstico interativo e ferramentas de negócio. Landing page com funil de diagnóstico.</p>
+          <div class="links">
+            <a href="https://kelvinoliveiracode.github.io/kodaros-landing/" target="_blank" rel="noopener">Abrir KODAROS</a>
+            <a href="https://github.com/KelvinOliveiraCode/kodaros-landing" target="_blank" rel="noopener">Repositório</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="shell" style="margin-top: 4rem;" id="exemplos">
+    <div style="border-top: 1px solid var(--line); padding-top: 3rem;">
+      <span class="kicker">Exemplos</span>
+      <h3 style="font-size: 1.5rem; margin: .5rem 0 .75rem; font-family: 'Space Grotesk', system-ui, sans-serif;">Exemplos de sites no ar</h3>
+      <p style="color: var(--text-secondary); max-width: 58ch; margin-bottom: 2rem; font-size: .95rem;">Estes são exemplos criados para demonstrar capacidade. São sites sem identidade visual específica. Sites para empresas reais seriam desenvolvidos sob medida, seguindo a identidade visual de cada cliente.</p>
+      <div class="carousel-wrapper" style="position: relative;">
+        <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Anterior" style="position: absolute; left: -1rem; top: 50%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg-alt); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background .2s, border-color .2s;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="carousel-track" id="carouselTrack" style="display: flex; gap: .75rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: .5rem 0; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab;" tabindex="0" role="region" aria-label="Carrossel de exemplos de sites">
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/clinica-medica/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/clinica-medica.jpg" alt="Exemplo de site para clínica médica" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Clínica Médica</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/academia-fitness/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/academia-fitness.jpg" alt="Exemplo de site para academia" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Academia</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/advocacia/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/advogacia.jpg" alt="Exemplo de site para advocacia" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Advocacia</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/moda-ecommerce/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/moda-ecommerce.jpg" alt="Exemplo de site para moda" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Moda</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/cursos-ead/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/cursos-ead.jpg" alt="Exemplo de site para cursos" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Cursos</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/imobiliaria/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/imobiliaria.jpg" alt="Exemplo de site para imobiliária" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Imobiliária</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/estetica-beleza/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/estetica-beleza.jpg" alt="Exemplo de site para estética" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Estética</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/tech-saas/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/tech-saas.jpg" alt="Exemplo de site para SaaS" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">SaaS</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/restaurante-delivery/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/restaurante-delivery.jpg" alt="Exemplo de site para restaurante" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Restaurante</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/financas-investimentos/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/financas-investimentos.jpg" alt="Exemplo de site para finanças" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Finanças</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/casamento-eventos/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/casamento-eventos.jpg" alt="Exemplo de site para casamento" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Casamento</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/odontologia/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/odontologia.jpg" alt="Exemplo de site para odontologia" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Odontologia</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/marketing-digital/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/marketing-digital.jpg" alt="Exemplo de site para marketing digital" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Marketing</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/energia-solar/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/energia-solar.jpg" alt="Exemplo de site para energia solar" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Energia Solar</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/construcao-civil/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/construcao-civil.jpg" alt="Exemplo de site para construção civil" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Construção</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/viagens-turismo/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/viagens-turismo.jpg" alt="Exemplo de site para viagens" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Viagens</div></div></a>
+          <a href="https://kelvinoliveiracode.github.io/modelos-de-sites/cripto-web3/" target="_blank" rel="noopener" style="flex: 0 0 280px; scroll-snap-align: start; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; transition: border-color .25s, transform .25s;"><img src="assets/screens/cripto-web3.jpg" alt="Exemplo de site para cripto" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"><div style="padding: .5rem .75rem;"><div style="font-size: .75rem; font-weight: 600;">Cripto</div></div></a>
+        </div>
+        <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Próximo" style="position: absolute; right: -1rem; top: 50%; transform: translateY(-50%); z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg-alt); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background .2s, border-color .2s;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <p style="color: var(--muted); font-size: .8rem; margin-top: 1.5rem;"><a href="https://github.com/KelvinOliveiraCode/modelos-de-sites" target="_blank" rel="noopener" style="color: var(--text-secondary); border-bottom: 1px solid var(--line); padding-bottom: 1px;">Ver repositório completo no GitHub</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="stack" id="stack">
+  <div class="shell">
+    <div class="head">
+      <span class="kicker" style="color:#7a7a80">Stack</span>
+      <h2 class="reveal">Tecnologias dominadas.</h2>
+    </div>
+    <div class="grid-stack">
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/python" alt="Python" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Python</div><div class="tag">Backend, IA, Dados</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/javascript" alt="JavaScript" width="32" height="32" loading="eager"></div>
+        <div><div class="name">JavaScript</div><div class="tag">Frontend, Backend</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/typescript" alt="TypeScript" width="32" height="32" loading="eager"></div>
+        <div><div class="name">TypeScript</div><div class="tag">Frontend, Backend</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Java</div><div class="tag">Enterprise, APIs</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/rust" alt="Rust" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Rust</div><div class="tag">Sistema, Tauri</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/react" alt="React" width="32" height="32" loading="eager"></div>
+        <div><div class="name">React</div><div class="tag">UI, Componentes</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/nodedotjs" alt="Node.js" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Node.js</div><div class="tag">Runtime, APIs</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/docker" alt="Docker" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Docker</div><div class="tag">Containers</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL" width="32" height="32" loading="eager"></div>
+        <div><div class="name">PostgreSQL</div><div class="tag">Banco de Dados</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/springboot" alt="Spring Boot" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Spring Boot</div><div class="tag">Java, APIs REST</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Tailwind</div><div class="tag">CSS, Utility-first</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/html5" alt="HTML5" width="32" height="32" loading="eager"></div>
+        <div><div class="name">HTML5</div><div class="tag">Semântica, SEO</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/css" alt="CSS" width="32" height="32" loading="eager"></div>
+        <div><div class="name">CSS</div><div class="tag">Layout, Animações</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/git" alt="Git" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Git</div><div class="tag">Versionamento</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/tauri" alt="Tauri" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Tauri</div><div class="tag">Desktop, Rust</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/vite" alt="Vite" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Vite</div><div class="tag">Build Tool</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/linux" alt="Linux" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Linux</div><div class="tag">Servidores, DevOps</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/mysql" alt="MySQL" width="32" height="32" loading="eager"></div>
+        <div><div class="name">MySQL</div><div class="tag">Banco de Dados</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/expo" alt="Expo" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Expo</div><div class="tag">React Native</div></div>
+      </div>
+      <div class="tech reveal">
+        <div class="icon"><img src="https://cdn.simpleicons.org/ruby" alt="Ruby" width="32" height="32" loading="eager"></div>
+        <div><div class="name">Ruby</div><div class="tag">Linguagem, Scripts</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="about" id="sobre">
+  <div class="shell">
+    <div>
+      <span class="kicker">Como trabalhamos</span>
+      <h2 class="reveal">Projetos organizados de ponta a ponta.</h2>
+      <p class="reveal" style="font-size: 1.15rem; max-width: 62ch; margin-bottom: 1.5rem;">Antes do código: conversa, escopo, fluxo. Durante: atualizações curtas e sem jargão. Depois: documentação mínima para que qualquer dev continue sem perguntar.</p>
+      <p class="reveal" style="font-size: 1.15rem; max-width: 62ch; margin-bottom: 1.5rem;">Não prometemos velocidade impossível. Prazo honesto e um produto que não exige manutenção porque ninguém lembrava o where-and-what.</p>
+      <p class="reveal" style="font-size: 1.15rem; max-width: 62ch;">O processo é transparente do início ao fim. Você acompanha cada etapa, decide junto, e recebe um produto final que funciona de verdade.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contato" style="background: var(--bg); color: var(--text);">
+  <div class="shell">
+    <span class="kicker">Contato</span>
+    <h2 class="reveal" style="font-size: clamp(2.2rem, 4.5vw, 5rem); margin-bottom: 1rem; color: var(--text);">Envie um brief e crie seu projeto conosco.</h2>
+    <p class="lead reveal" style="font-size: 1.15rem; color: var(--text-secondary); max-width: 52ch; margin-bottom: 2rem;">Diga o problema, o prazo e o que você já tem (marca, dados, prints). Respondemos em até dois dias úteis com perguntas de escopo real, não template.</p>
+    <div class="actions reveal" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem;">
+      <a class="btn-dark" href="https://wa.me/5591986134599?text=Ol%C3%A1%2C%20quero%20enviar%20um%20brief%20para%20o%20Tessumax" target="_blank" rel="noopener" style="background: var(--paper); color: var(--ink); padding: 1rem 1.6rem; border-radius: 999px; font-weight: 600; transition: transform .2s, background .2s;">Falar no WhatsApp</a>
+      <a href="https://github.com/KelvinOliveiraCode" target="_blank" rel="noopener" style="border: 1px solid var(--line); color: var(--text); padding: 1rem 1.6rem; border-radius: 999px; font-weight: 600; transition: border-color .2s, background .2s;">GitHub</a>
+    </div>
+    <div class="reveal" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 4rem; margin-bottom: 4rem; padding-top: 3rem; border-top: 1px solid var(--line);">
+      <div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; font-family: 'Space Grotesk', system-ui, sans-serif;">Redes sociais</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: .75rem;">
+          <a href="https://instagram.com/tessumax" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; font-weight: 500; transition: border-color .25s, transform .25s;"><img src="https://cdn.simpleicons.org/instagram" alt="Instagram" width="18" height="18" style="filter: brightness(0) invert(1);">Instagram</a>
+          <a href="https://tiktok.com/@tessumax" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; font-weight: 500; transition: border-color .25s, transform .25s;"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok" width="18" height="18" style="filter: brightness(0) invert(1);">TikTok</a>
+          <a href="https://x.com/Tessumax" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; font-weight: 500; transition: border-color .25s, transform .25s;"><img src="https://cdn.simpleicons.org/x" alt="X" width="18" height="18" style="filter: brightness(0) invert(1);">X</a>
+          <a href="https://facebook.com/TessumaxStudio" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; font-weight: 500; transition: border-color .25s, transform .25s;"><img src="https://cdn.simpleicons.org/facebook" alt="Facebook" width="18" height="18" style="filter: brightness(0) invert(1);">Facebook</a>
+          <a href="https://www.linkedin.com/in/kelvin-oliveira-code/" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; font-weight: 500; transition: border-color .25s, transform .25s;"><img src="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@latest/svgs/brands/linkedin.svg" alt="LinkedIn" width="18" height="18" style="filter: brightness(0) invert(1);">LinkedIn</a>
+          <a href="https://wa.me/5591986134599" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; font-weight: 500; transition: border-color .25s, transform .25s;"><img src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp" width="18" height="18" style="filter: brightness(0) invert(1);">WhatsApp</a>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; font-family: 'Space Grotesk', system-ui, sans-serif;">Links de entrega</h3>
+        <div style="display: flex; flex-direction: column; gap: .75rem;">
+          <a href="https://kelvinoliveiracode.github.io/portfolio/" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .75rem; padding: .75rem 1rem; border: 1px solid var(--line); border-radius: var(--radius-sm); transition: border-color .25s, transform .25s;"><img src="assets/logo.svg" alt="Portfólio" width="24" height="24" style="filter: invert(1);"><div><div style="font-size: .9rem; font-weight: 500;">Portfólio</div><div style="font-size: .75rem; color: var(--muted);">Kelvin Oliveira</div></div></a>
+          <a href="https://github.com/KelvinOliveiraCode/modelos-de-sites" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: .75rem; padding: .75rem 1rem; border: 1px solid var(--line); border-radius: var(--radius-sm); transition: border-color .25s, transform .25s;"><img src="https://cdn.simpleicons.org/github" alt="GitHub" width="24" height="24" style="filter: brightness(0) invert(1);"><div><div style="font-size: .9rem; font-weight: 500;">Hub de Sites</div><div style="font-size: .75rem; color: var(--muted);">github.com/KelvinOliveiraCode/modelos-de-sites</div></div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="shell">
+    <div class="footer-copy">
+      <img src="assets/logo.svg" class="logo" alt="Tessumax">
+      <small>© 2026 Tessumax Studio · sites, sistemas e apps.</small>
+      <span class="credit"><a href="https://kelvinoliveiracode.github.io/portfolio/" target="_blank" rel="noopener">Feito por Kelvin Oliveira</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Preloader
+  const preloader = document.getElementById('preloader');
+  const barFill = document.getElementById('barFill');
+  document.body.style.overflow = 'hidden';
+  let progress = 0;
+  const barTick = setInterval(() => {
+    progress += Math.random() * 8 + 3;
+    if (progress >= 90) progress = 90;
+    barFill.style.width = Math.round(progress) + '%';
+  }, 100);
+
+  // Preload all assets before revealing the site
+  function preloadImages() {
+    const sources = [];
+    const seen = new Set();
+    document.querySelectorAll('img').forEach((img) => {
+      if (img.src && !seen.has(img.src)) { seen.add(img.src); sources.push(img.src); }
+    });
+    // hero background
+    const heroBg = document.querySelector('header.hero .bg');
+    if (heroBg) {
+      const bgImage = getComputedStyle(heroBg).backgroundImage;
+      const match = bgImage && bgImage.match(/url\(["']?([^"')]+)["']?\)/);
+      if (match && match[1] && !seen.has(match[1])) { seen.add(match[1]); sources.push(match[1]); }
+    }
+    const tasks = sources.map((src) => new Promise((resolve) => {
+      const img = new Image();
+      img.onload = img.onerror = () => resolve(src);
+      img.src = src;
+    }));
+    return Promise.all(tasks);
+  }
+
+  function waitForFonts() {
+    if (document.fonts && document.fonts.ready) {
+      return document.fonts.ready;
+    }
+    return Promise.resolve();
+  }
+
+  function waitForDomReady() {
+    if (document.readyState === 'complete') return Promise.resolve();
+    return new Promise((resolve) => {
+      if (document.readyState === 'loading') {
+        window.addEventListener('load', () => resolve(), { once: true });
+      } else {
+        // interactive
+        window.addEventListener('DOMContentLoaded', () => resolve(), { once: true });
+      }
+    });
+  }
+
+  function waitForPaint() {
+    return new Promise((resolve) => {
+      requestAnimationFrame(() => requestAnimationFrame(resolve));
+    });
+  }
+
+  Promise.all([preloadImages(), waitForFonts(), waitForDomReady()])
+    .then(() => waitForPaint())
+    .then(() => {
+      progress = 100;
+      barFill.style.width = '100%';
+      clearInterval(barTick);
+      setTimeout(() => {
+        preloader.classList.add('done');
+        document.body.style.overflow = '';
+      }, 400);
+    })
+    .catch(() => {
+      progress = 100;
+      barFill.style.width = '100%';
+      clearInterval(barTick);
+      preloader.classList.add('done');
+      document.body.style.overflow = '';
+    });
+
+  // Hamburger menu toggle
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (hamburgerBtn && mobileMenu) {
+    hamburgerBtn.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburgerBtn.classList.toggle('open', open);
+      hamburgerBtn.setAttribute('aria-expanded', String(open));
+    });
+    mobileMenu.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // Fallback de seguranca
+  setTimeout(() => {
+    if (!preloader.classList.contains('done')) {
+      progress = 100;
+      barFill.style.width = '100%';
+      clearInterval(barTick);
+      preloader.classList.add('done');
+      document.body.style.overflow = '';
+    }
+  }, 8000);
+
+  // Nav visibility
+  const nav = document.getElementById('mainNav');
+  setTimeout(() => nav.classList.add('visible'), 100);
+
+  // Scroll reveal
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach((el) => {
+      observer.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+  }
+
+  // Smooth parallax no hero (leve)
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const heroBg = document.querySelector('header.hero .bg');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (scrolled < window.innerHeight) {
+        heroBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+      }
+    }, { passive: true });
+  }
+
+  // Carousel drag-to-scroll + botões
+  const track = document.getElementById('carouselTrack');
+  const prevBtn = document.getElementById('carouselPrev');
+  const nextBtn = document.getElementById('carouselNext');
+  if (track) {
+    let isDown = false;
+    let startX = 0;
+    let startScroll = 0;
+    let isDragging = false;
+
+    track.addEventListener('pointerdown', (e) => {
+      isDown = true;
+      isDragging = false;
+      startX = e.clientX;
+      startScroll = track.scrollLeft;
+      track.style.cursor = 'grabbing';
+      track.style.scrollBehavior = 'auto';
+    });
+
+    track.addEventListener('pointermove', (e) => {
+      if (!isDown) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 5) isDragging = true;
+      track.scrollLeft = startScroll - dx;
+    });
+
+    track.addEventListener('pointerup', () => {
+      isDown = false;
+      track.style.cursor = 'grab';
+      track.style.scrollBehavior = 'smooth';
+    });
+
+    track.addEventListener('pointerleave', () => {
+      isDown = false;
+      track.style.cursor = 'grab';
+    });
+
+    // Previne clique após drag
+    track.addEventListener('click', (e) => {
+      if (isDragging) {
+        e.preventDefault();
+        e.stopPropagation();
+        isDragging = false;
+      }
+    }, true);
+
+    const cardWidth = 280 + 12; // flex-basis + gap
+    prevBtn?.addEventListener('click', () => {
+      track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    });
+    nextBtn?.addEventListener('click', () => {
+      track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    });
+
+    // Esconde scrollbar mas mantém funcionalidade
+    track.style.scrollbarWidth = 'none';
+    track.style.msOverflowStyle = 'none';
+    const style = document.createElement('style');
+    style.textContent = '#carouselTrack::-webkit-scrollbar { display: none; }';
+    document.head.appendChild(style);
+  }
+</script>
+
+</body>
+</html>
