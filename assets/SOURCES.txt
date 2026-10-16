@@ -56,6 +56,7 @@ assets/logos/whisper.svg | https://cdn.jsdelivr.net/npm/simple-icons@latest/icon
 assets/og-image.png | 1200x630 | gerado de banner-tessumax.svg | rasterizado em Chrome headless; fundo do card casado com a cor amostrada da propria arte (#0a0a0b)
 assets/apple-touch-icon.png | 180x180 | gerado de logo-Tessumax.svg | mesmo metodo; fundo #fefefe amostrado da arte
 assets/logo-tessumax.svg | 408x311 | derivado de logo-Tessumax.svg | placa de fundo removida (subpath de 163 chars do path branco); arte mantida com fill-rule evenodd e viewBox reapertado na bbox medida da propria arte (139.01 133.23 391.55 294.87 + 8 de folga). Sem cor fixa de tema: o CSS (.brand-mark/.preloader-mark/.footer-mark) aplica branco no Tinta e preto no Papel, igual as demais logos.
+assets/banner-tessumax-arte.svg | 1352x276 | derivado de banner-tessumax.svg | placa de fundo removida (path fill="#0a0a0b"); apenas a arte (path fill="#fcfbfc") mantida com fill-rule evenodd e viewBox reapertado na bbox medida da propria arte (232.78 192.95 1336.27 259.62 + 8 de folga). Sem cor fixa de tema: o CSS (.hero-banner) aplica branco no Tinta e preto no Papel via filter brightness(0)+invert(1) / brightness(0), igual a logo-tessumax.svg.
 
 === ÍCONES ===
 assets/icons/facebook.svg | https://cdn.simpleicons.org/facebook/white | 557
@@ -89,3 +90,4 @@ assets/screens/tech-saas.png | 800x800 | 114119
 assets/screens/viagens-turismo.png | 800x800 | 105003
 
 Logos de marca: Simple Icons (CC0), marcas pertencem aos respectivos titulares. Capturas: acervo próprio Tessumax/KelvinOliveiraCode.
+assets/icons/email.svg | https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@latest/svgs/solid/envelope.svg | Font Awesome Free 7.3.1 (CC BY 4.0) | icone E-mail, fill forcado para #ffffff como os demais icones | 395
