@@ -1,117 +1,96 @@
 # tessumax-landing
 
-<div align="center">
-
 [English](README.en.md) · **Português (Brasil)**
 
-</div>
-
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML) [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS) [![Vanilla JS](https://img.shields.io/badge/Vanilla%20JS-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-222?style=flat-square&logo=githubpages)](https://pages.github.com/) [![MIT License](https://img.shields.io/badge/License-MIT-f4c430?style=flat-square)](LICENSE)
-
-### Tessumax landing page
-
----
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](#) [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](#) [![Vanilla JS](https://img.shields.io/badge/Vanilla%20JS-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](#) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-222?style=flat-square&logo=githubpages)](#)
 
 ## O que é
 
-Tessumax landing page
+Landing page da **Tessumax**, a marca de serviços digitais de Kelvin Oliveira: desenvolvimento de **sites, sistemas, apps, vídeo e marketing** — "do brief ao lançamento". A página apresenta quatro frentes de serviço, um processo em etapas, produtos publicados verificáveis, depoimentos, FAQ e um **formulário de brief** que monta um resumo do projeto para enviar pelo WhatsApp.
 
----
+## Status
 
-## Início Rápido
+Em produção. Publicada em <https://kelvinoliveiracode.github.io/tessumax-landing/> (HTTP 200 verificado).
 
-Abra `index.html` diretamente no navegador, ou sirva localmente:
+## Funcionalidades
+
+- **Quatro frentes de serviço**: sites, sistemas, apps, vídeo e marketing.
+- **Seção de processo**: etapas claras, "sem surpresa".
+- **Produtos publicados e modelos por nicho** como prova de trabalho.
+- **Tecnologias dominadas** (lista de logos/stacks).
+- **Depoimentos** e **FAQ** (perguntas diretas).
+- **Formulário de brief**: coleta nome, e-mail/WhatsApp e escopo; gera um resumo com opção de **abrir o WhatsApp** ou **copiar o resumo** (sem backend).
+- **Tema claro/escuro** persistido em `localStorage` (`tessumax-theme`), com respeito a `prefers-reduced-motion`.
+- **Fontes servidas localmente** (Archivo + JetBrains Mono, ver `assets/SOURCES.txt`).
+
+> Nota: o README anterior descrevia um **catálogo de serviços de nuvem** — não existe neste repositório. Corrigido.
+
+## Arquitetura
+
+Landing estática de página única: `index.html` (1.184 linhas) + `assets/js/main.js` (830 linhas, vanilla) + `assets/css/main.css` (1.779 linhas). Interatividade: tema claro/escuro, preloader, validação/geração do brief e abertura do WhatsApp. Sem framework, sem build, sem backend.
+
+```mermaid
+flowchart LR
+    H[index.html] --> M[assets/js/main.js]
+    M --> T[theme claro/escuro]
+    M --> P[preloader]
+    M --> B[formulário de brief]
+    B --> W[Abrir WhatsApp / copiar resumo]
+```
+
+## Stack
+
+- HTML5, CSS3, JavaScript ES6+ vanilla
+- Fontes locais: Archivo + JetBrains Mono (see `SOURCES.txt`)
+- Hospedagem: GitHub Pages
+
+## Estrutura do repositório
+
+```
+tessumax-landing/
+├── index.html              # a landing inteira (1.184 linhas)
+├── assets/
+│   ├── css/main.css        # tema e layout (1.779 linhas)
+│   ├── js/main.js          # lógica (830 linhas)
+│   ├── fonts/              # Archivo + JetBrains Mono (locais)
+│   └── SOURCES.txt         # origem dos assets
+└── .nojekyll               # deploy GitHub Pages sem Jekyll
+```
+
+## Pré-requisitos e instalação
+
+Nenhum. Basta servir a pasta estaticamente.
+
+## Como executar
 
 ```bash
 python -m http.server 8080
-# Acesse http://localhost:8080
+# acesse http://localhost:8080
 ```
 
-Ou faça deploy no GitHub Pages / Netlify / Vercel com configuração zero.
+## Testes e qualidade
 
-## Como funciona
+Não há testes automatizados, `package.json` nem CI neste repositório (ausência confirmada). A validação é manual: o formulário de brief checa e-mail/WhatsApp e escopo antes de montar o resumo.
 
-**Arquitetura zero-build, arquivo único** ,  tudo vive em `index.html`:
-- **HTML5** estrutura semântica
-- **CSS3** propriedades customizadas para tema (claro/escuro)
-- **Vanilla ES6+ JavaScript** ,  sem framework, sem build
-- **localStorage** para persistência de tema
-- **Catálogo JSON** (`catalogo.json`) como fonte de dados aberta
+## Decisões técnicas e trade-offs
 
----
+- **Base de captação via WhatsApp** em vez de backend/email server: sem custo de infraestrutura e direto na conversa; em troca, nenhum lead fica registrado em sistema próprio.
+- **Fontes e imagens servidas localmente**: desempenho e independência de CDN.
+- **Zero framework**: landing leve, fácil de manter e publicar em qualquer hospedagem estática.
+- **Tema com respeito a `prefers-reduced-motion`** e `prefers-color-scheme`.
 
-## Capacidades
+## Limitações conhecidas e roadmap
 
-| Capacidade | Descrição |
-|------------|-------------|
-| Motor de Recomendação | Filtro determinístico: Área ∩ Preço -> Provedor -> Tier gratuito -> Nível de config |
-| Catálogo | 124 serviços de 8 provedores (AWS, Azure, GCP, Oracle, Cloudflare, DO, Firebase, Google) |
-| Dados Abertos | catalogo.json + llms.txt para consumo por chat de IA |
-| Educação | Vocabulário de nuvem (IaaS/PaaS/SaaS), myth-busting, glossário, quiz de 5 perguntas |
-| Tematização | Modo claro/escuro persistido em localStorage, sem CSS externo |
-| Zero Build | index.html único ,  deploy em qualquer lugar (GitHub Pages, Netlify, Vercel) |
-| Auditoria | Cada decisão do filtro exibida: "Como chegamos aqui" rastreia todos 124 serviços |
-| Sem Rastreamento | Sem contas de usuário, sem analytics, sem dependências externas |
+- O formulário não envia a lead para um CRM/e-mail; depende do envio manual via WhatsApp.
+- Sem analytics próprio (a landing não rastreia visitas).
+- Conteúdo estático: atualizar ofertas/processo exige editar o HTML.
 
+## Processo de desenvolvimento
 
----
+Projeto individual de Kelvin Oliveira, construído com agentes de IA orquestrados e revisado pelo autor. A arquitetura da landing, o fluxo do brief e a revisão são do autor.
 
+## Licença e autor
 
+Este repositório **não possui arquivo de licença** (sem `LICENSE`). Copyright (c) 2026 Kelvin Rebelo de Oliveira — entre em contato com o autor para uso além do portfólio.
 
----
-
-## Perguntas Frequentes
-
-<details>
-<summary><strong>O que é este projeto?</strong></summary>
-
-Um estudo/projeto em vanilla JS demonstrando Custom CSS styling, Single-page HTML entry, Vanilla JavaScript logic, localStorage theme persistence.
-
-</details>
-
-<details>
-<summary><strong>Como executar?</strong></summary>
-
-Veja [Início Rápido](#início-rápido) para comandos copiáveis.
-
-</details>
-
-<details>
-<summary><strong>Há testes?</strong></summary>
-
-Nenhum teste automatizado neste repositório.
-
-</details>
-
-<details>
-<summary><strong>Posso usar em produção?</strong></summary>
-
-Este é um **projeto de estudo/portfólio**. Revise e endureça (auth, persistência, monitoramento, etc.) antes de usar em produção.
-
-</details>
-
-
-
----
-
-## Documentação
-
-- **Código-Fonte** ,  Navegue pelo diretório `src/` para detalhes de implementação
-- **Referência da API** ,  N/A
-- **Diagrama de Arquitetura** ,  Veja [architecture.mermaid](docs/architecture.mermaid) (se presente)
-- **Changelog** ,  [CHANGELOG.md](CHANGELOG.md) (se presente)
-- **Contribuindo** ,  [CONTRIBUTING.md](CONTRIBUTING.md) (se presente)
-
-## Licença
-
-[MIT](LICENSE) ,  Kelvin Oliveira
-
----
-
-<div align="center">
-
-**Construído com** · Vanilla HTML/CSS/JS
-
-**Autor** · [Kelvin Oliveira](https://github.com/KelvinOliveiraCode) · [Portfolio](https://kelvinoliveiracode.github.io/portfolio/)
-
-</div>
+**Autor**: [Kelvin Oliveira](https://github.com/KelvinOliveiraCode) · [Portfólio](https://kelvinoliveiracode.github.io/portfolio/)
